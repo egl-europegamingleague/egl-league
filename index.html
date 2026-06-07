@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGL League | Мировой Рейтинг Команд</title>
+    <style>
+        :root {
+            --hltv-bg: #f4f5f7;
+            --hltv-nav-bg: #161f2b;
+            --hltv-subnav-bg: #212c3d;
+            --hltv-box-bg: #ffffff;
+            --hltv-box-header: #e6e9ee;
+            --hltv-border: #cbd3de;
+            --hltv-text-dark: #1b222c;
+            --hltv-text-grey: #626d7c;
+            --hltv-accent-blue: #3c5685;
+            --hltv-accent-orange: #e56b1f;
+            --hltv-row-hover: #f0f3f7;
+            --toast-bg: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--hltv-bg);
+            color: var(--hltv-text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            padding-bottom: 60px;
+        }
+
+        /* Верхняя навигационная панель */
+        .hltv-navbar {
+            background-color: var(--hltv-nav-bg);
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            border-bottom: 2px solid var(--hltv-accent-blue);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .navbar-brand span {
+            color: var(--hltv-accent-orange);
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 4px;
+            height: 100%;
+        }
+
+        .navbar-links a {
+            color: #9aa4af;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            position: relative;
+            height: 100%;
+        }
+
+        .navbar-links a:hover {
+            color: #ffffff;
+            background-color: rgba(255,255,255,0.03);
+        }
+
+        .navbar-links a.active {
+            color: #ffffff;
+            background-color: rgba(93, 121, 174, 0.15);
+        }
+
+        .navbar-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--hltv-accent-orange);
+        }
+
+        /* Вторичное меню */
+        .sub-navbar {
+            background-color: var(--hltv-subnav-bg);
+            padding: 14px 24px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #9aa4af;
+            border-bottom: 1px solid var(--hltv-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: 0.3px;
+        }
+
+        .sub-navbar .update-time {
+            background-color: rgba(229, 107, 31, 0.12);
+            color: var(--hltv-accent-orange);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            border: 1px solid rgba(229, 107, 31, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sub-navbar .update-time::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--hltv-accent-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--hltv-accent-orange);
+        }
+
+        /* Основной контейнер */
+        .main-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .ranking-header {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--hltv-text-dark);
+            border-left: 5px solid var(--hltv-accent-blue);
+            padding-left: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Таблица рейтинга */
+        .ranking-box {
+            background-color: var(--hltv-box-bg);
+            border: 1px solid var(--hltv-border);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .ranking-box-title {
+            background-color: var(--hltv-box-header);
+            padding: 12px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--hltv-text-grey);
+            border-bottom: 1px solid var(--hltv-border);
+            display: flex;
+            justify-content: space-between;
+            letter-spacing: 0.8px;
+        }
+
+        /* Строка команды */
+        .ranked-team-row {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--hltv-border);
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .ranked-team-row:last-child {
+            border-bottom: none;
+        }
+
+        .ranked-team-row:hover {
+            background-color: var(--hltv-row-hover);
+        }
+
+        .team-position {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--hltv-text-dark);
+            width: 45px;
+            text-align: center;
+        }
+
+        .team-change {
+            font-size: 13px;
+            color: var(--hltv-text-grey);
+            width: 35px;
+            text-align: center;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        /* ИСПРАВЛЕННЫЙ КОНТЕЙНЕР ДЛЯ ЧЕРНОГО ЛОГОТИПА */
+        .team-logo-container {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0d0f12;
+            border: 1px solid var(--hltv-border);
+            border-radius: 6px;
+            margin-right: 18px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .team-logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .team-main-info {
+            flex-grow: 1;
+        }
+
+        .team-identity {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .team-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--hltv-accent-blue);
+            text-decoration: none;
+            letter-spacing: 0.2px;
+        }
+
+        .ranked-team-row:hover .team-name {
+            color: var(--hltv-accent-orange);
+            text-decoration: underline;
+        }
+
+        .team-players {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--hltv-text-grey);
+        }
+
+        .player-tag {
+            background-color: #f0f2f5;
+            padding: 2px 8px;
+            border-radius: 3px;
+            border: 1px solid #dcdfe4;
+            font-weight: 600;
+            color: #4c5664;
+        }
+        
+        .player-tag span {
+            margin-right: 4px;
+            font-size: 11px;
+            opacity: 0.6;
+        }
+
+        .team-stats-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            min-width: 110px;
+            padding-left: 10px;
+        }
+
+        .stat-row-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            line-height: 1.3;
+        }
+
+        .stat-row-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--hltv-text-grey);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-row-value {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--hltv-text-dark);
+            margin-bottom: 5px;
+        }
+
+        .stat-row-value.points-count {
+            color: var(--hltv-accent-blue);
+            background-color: #eef2f8;
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: 1px solid #d3dee0;
+            font-size: 12px;
+        }
+
+        .stat-row-value.tier-badge {
+            color: #ffffff;
+            background-color: #5c6b82;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .dev-toast {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--toast-bg);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-left: 4px solid var(--hltv-accent-orange);
+            font-weight: 600;
+            z-index: 1000;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 340px;
+            justify-content: center;
+        }
+
+        .dev-toast.show {
+            bottom: 30px;
+            opacity: 1;
+        }
+
+        .dev-toast .icon {
+            color: var(--hltv-accent-orange);
+            font-size: 18px;
+        }
+
+        @media (max-width: 650px) {
+            .hltv-navbar { padding: 0 12px; }
+            .navbar-brand { font-size: 18px; }
+            .navbar-links a { font-size: 11px; padding: 0 8px; }
+            .ranked-team-row { padding: 12px 10px; }
+            .team-position { width: 30px; font-size: 16px; }
+            .team-change { width: 20px; font-size: 11px; margin-right: 5px; }
+            .team-logo-container { width: 42px; height: 42px; margin-right: 10px; }
+            .team-name { font-size: 14px; }
+            .team-players { display: none; }
+            .team-stats-cell { min-width: 90px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hltv-navbar">
+        <div class="navbar-brand" onclick="showDevAlert()">EGL <span>League</span></div>
+        <div class="navbar-links">
+            <a href="#" class="active" onclick="event.preventDefault();">Рейтинг</a>
+            <a href="#" onclick="showDevAlert(event)">Матчи</a>
+            <a href="#" onclick="showDevAlert(event)">Турниры</a>
+            <a href="#" onclick="showDevAlert(event)">Команды</a>
+        </div>
+    </div>
+
+    <div class="sub-navbar">
+        <div>Регион: СНГ / Мир</div>
+        <div class="update-time">Обновлено сегодня</div>
+    </div>
+
+    <div class="main-container">
+        <h2 class="ranking-header">Командный рейтинг EGL</h2>
+        
+        <div class="ranking-box">
+            <div class="ranking-box-title">
+                <div>Текущее положение команд</div>
+                <div>Статистика</div>
+            </div>
+
+            <!-- #1 RAGE TEAM -->
+            <div class="ranked-team-row" onclick="showDevAlert()">
+                <div class="team-position">#1</div>
+                <div class="team-change">-</div>
+                
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/YqyHFZF0/IMG-20260608-005318-638-(1).jpg" alt="RAGE TEAM">
+                </div>
+
+                <div class="team-main-info">
+                    <div class="team-identity">
+                        <span class="team-name">RAGE TEAM</span>
+                    </div>
+                    <div class="team-players">
+                        <div class="player-tag"><span>👤</span>Darksouls</div>
+                        <div class="player-tag"><span>👤</span>toriś</div>
+                        <div class="player-tag"><span>👤</span>Ctrl</div>
+                        <div class="player-tag"><span>👤</span>Destroy</div>
+                        <div class="player-tag"><span>👤</span>jn</div>
+                    </div>
+                </div>
+
+                <div class="team-stats-cell">
+                    <div class="stat-row-block">
+                        <span class="stat-row-label">Тир лига</span>
+                        <span class="stat-row-value tier-badge">Tier 3</span>
+                    </div>
+                    <div class="stat-row-block">
+                        <span class="stat-row-label">Очки</span>
+                        <span class="stat-row-value points-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #2 TEAM MIDLESS -->
+            <div class="ranked-team-row" onclick="showDevAlert()">
+                <div class="team-position">#2</div>
+                <div class="team-change">-</div>
+                
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png" alt="TEAM MIDLESS">
+                </div>
+
+                <div class="team-main-info">
+                    <div class="team-identity">
+                        <span class="team-name">TEAM MIDLESS</span>
+                    </div>
+                    <div class="team-players">
+                        <div class="player-tag"><span>👤</span>sakayuke</div>
+                        <div class="player-tag"><span>👤</span>dr1m</div>
+                        <div class="player-tag"><span>👤</span>lonely</div>
+                        <div class="player-tag"><span>👤</span>vers4sss</div>
+                        <div class="player-tag"><span>👤</span>DelphiDeer</div>
+                    </div>
+                </div>
+
+                <div class="team-stats-cell">
+                    <div class="stat-row-block">
+                        <span class="stat-row-label">Тир лига</span>
+                        <span class="stat-row-value tier-badge">Tier 3</span>
+                    </div>
+                    <div class="stat-row-block">
+                        <span class="stat-row-label">Очки</span>
+                        <span class="stat-row-value points-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="devToast" class="dev-toast">
+        <span class="icon">⚠️</span>
+        <span>Раздел находится в разработке. Пока доступен только командный рейтинг.</span>
+    </div>
+
+    <script>
+        let toastTimeout;
+        function showDevAlert(event) {
+            if (event) event.preventDefault();
+            const toast = document.getElementById('devToast');
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+    </script>
+
+</body>
+</html>
