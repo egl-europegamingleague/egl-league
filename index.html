@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EGL League | Мировой Рейтинг Команд</title>
+    <title>EGL League | Мировой Рейтинг и Статистика</title>
     <style>
         :root {
             --egl-bg: #f4f5f7;
@@ -15,7 +15,7 @@
             --egl-text-dark: #1b222c;
             --egl-text-grey: #626d7c;
             --egl-accent-blue: #3c5685;
-            --egl-!accent-orange: #e56b1f;
+            --egl-accent-orange: #e56b1f;
             --egl-row-hover: #f0f3f7;
             --toast-bg: #1e293b;
         }
@@ -160,7 +160,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Таблица рейтинга */
+        /* Таблица рейтинга команд */
         .ranking-box {
             background-color: var(--egl-box-bg);
             border: 1px solid var(--egl-border);
@@ -278,6 +278,13 @@
             border: 1px solid #dcdfe4;
             font-weight: 600;
             color: #4c5664;
+            transition: all 0.2s ease;
+        }
+        
+        .player-tag:hover {
+            background-color: var(--egl-accent-blue);
+            color: #ffffff;
+            border-color: var(--egl-accent-blue);
         }
         
         .player-tag span {
@@ -335,267 +342,96 @@
             text-transform: uppercase;
         }
 
-        /* ========================================================
-           ПРОФЕССИОНАЛЬНЫЕ СТИЛИ ПРОФИЛЯ КОМАНДЫ (EGL PREMIUM)
-           ======================================================== */
-        
-        .back-link-container {
-            margin-bottom: 16px;
-        }
-
+        /* Профиль команды */
+        .back-link-container { margin-bottom: 16px; }
         .egl-back-btn {
-            background: none;
-            border: none;
-            color: var(--egl-accent-blue);
-            font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            background: none; border: none; color: var(--egl-accent-blue);
+            font-weight: 700; font-size: 13px; cursor: pointer;
+            text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px;
         }
+        .egl-back-btn:hover { color: var(--egl-accent-orange); text-decoration: underline; }
 
-        .egl-back-btn:hover {
-            color: var(--egl-accent-orange);
-            text-decoration: underline;
-        }
-
-        /* Премиальная Шапка Команды в стиле EGL */
         .egl-team-header {
-            background-color: var(--egl-subnav-bg);
-            border-radius: 4px 4px 0 0;
-            padding: 24px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            color: #ffffff;
-            border-bottom: 3px solid var(--egl-accent-orange);
+            background-color: var(--egl-subnav-bg); border-radius: 4px 4px 0 0;
+            padding: 24px; display: flex; align-items: center; gap: 24px;
+            color: #ffffff; border-bottom: 3px solid var(--egl-accent-orange);
             box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
-
         .egl-team-header-logo {
-            width: 90px;
-            height: 90px;
-            background-color: #0d0f12;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-            flex-shrink: 0;
+            width: 90px; height: 90px; background-color: #0d0f12; border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.15); display: flex;
+            align-items: center; justify-content: center; padding: 8px; flex-shrink: 0;
         }
+        .egl-team-header-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .egl-team-header-title { font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; color: #ffffff; }
+        .egl-team-header-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: #9aa4af; }
+        .egl-meta-pill { background-color: rgba(255, 255, 255, 0.07); padding: 4px 10px; border-radius: 3px; border: 1px solid rgba(255, 255, 255, 0.1); font-weight: 600; }
+        .egl-meta-pill span { color: #ffffff; font-weight: 700; }
 
-        .egl-team-header-logo img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+        .egl-profile-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-top: 20px; }
+        .egl-card { background-color: var(--egl-box-bg); border: 1px solid var(--egl-border); border-radius: 4px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.04); }
+        .egl-card-title { background-color: var(--egl-box-header); padding: 12px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--egl-text-grey); border-bottom: 1px solid var(--egl-border); letter-spacing: 0.8px; }
+
+        .egl-roster-flex { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding: 16px; }
+        .egl-player-card { background-color: #f8fafc; border: 1px solid var(--egl-border); border-radius: 4px; padding: 12px 6px; text-align: center; }
+        .egl-player-avatar { width: 100%; height: 64px; background-color: #e2e8f0; border-radius: 4px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #94a3b8; }
+        .egl-player-nick { font-weight: 700; font-size: 13px; color: var(--egl-text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .egl-player-sub { font-size: 10px; color: var(--egl-text-grey); text-transform: uppercase; margin-top: 2px; font-weight: 600; }
+        .egl-empty-table-state { padding: 34px; text-align: center; color: var(--egl-text-grey); font-weight: 600; font-size: 13px; }
+        .egl-empty-table-state-icon { font-size: 28px; display: block; margin-bottom: 8px; opacity: 0.6; }
+
+        .egl-stat-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #f0f3f7; font-size: 13px; }
+        .egl-stat-row:last-child { border-bottom: none; }
+        .egl-stat-label { color: var(--egl-text-grey); font-weight: 600; }
+        .egl-stat-value { font-weight: 700; color: var(--egl-text-dark); }
+        .egl-stat-value.highlight { color: var(--egl-accent-blue); }
+
+        /* ========================================================
+           СТИЛИ ДЛЯ БАЗЫ ДАННЫХ СТАТИСТИКИ (STATS VIEW)
+           ======================================================== */
+        .stats-grid-layout { display: grid; grid-template-columns: 240px 1fr; gap: 20px; }
+        .stats-sidebar-menu { background-color: var(--egl-box-bg); border: 1px solid var(--egl-border); border-radius: 4px; overflow: hidden; }
+        .stats-menu-item { padding: 14px 18px; font-size: 13px; font-weight: 700; color: var(--egl-text-dark); cursor: pointer; border-bottom: 1px solid var(--egl-border); transition: all 0.15s ease; }
+        .stats-menu-item:hover { background-color: var(--egl-row-hover); }
+        .stats-menu-item.active { color: var(--egl-accent-blue); background-color: #eef2f8; border-left: 4px solid var(--egl-accent-blue); padding-left: 14px; }
+
+        .egl-stats-table { width: 100%; border-collapse: collapse; background-color: var(--egl-box-bg); }
+        .egl-stats-table th { background-color: var(--egl-box-header); color: var(--egl-text-grey); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--egl-border); }
+        .egl-stats-table td { padding: 14px 16px; border-bottom: 1px solid var(--egl-border); font-size: 13px; color: var(--egl-text-dark); vertical-align: middle; }
+        .egl-stats-table tr:last-child td { border-bottom: none; }
+        .egl-stats-table tr:hover td { background-color: var(--egl-row-hover); }
+
+        .player-cell-profile { display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--egl-accent-blue); }
+        .player-cell-profile .flag { font-size: 15px; display: inline-flex; align-items: center; }
+        
+        /* Исправленный контейнер мини-логотипа в таблице */
+        .team-logo-mini-container {
+            width: 26px; height: 26px; background-color: #0d0f12;
+            border: 1px solid var(--egl-border); border-radius: 4px;
+            display: inline-flex; align-items: center; justify-content: center;
+            overflow: hidden; vertical-align: middle;
         }
+        .team-logo-mini-container img { width: 100%; height: 100%; object-fit: contain; }
 
-        .egl-team-header-info {
-            flex-grow: 1;
-        }
+        .team-cell-layout { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--egl-text-dark); }
+        .bold-stat-val { font-weight: 700; }
 
-        .egl-team-header-title {
-            font-size: 28px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        .egl-team-header-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            font-size: 12px;
-            color: #9aa4af;
-        }
-
-        .egl-meta-pill {
-            background-color: rgba(255, 255, 255, 0.07);
-            padding: 4px 10px;
-            border-radius: 3px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 600;
-        }
-
-        .egl-meta-pill span {
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        /* Двухколоночный макет EGL */
-        .egl-profile-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .egl-card {
-            background-color: var(--egl-box-bg);
-            border: 1px solid var(--egl-border);
-            border-radius: 4px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-        }
-
-        .egl-card-title {
-            background-color: var(--egl-box-header);
-            padding: 12px 16px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--egl-text-grey);
-            border-bottom: 1px solid var(--egl-border);
-            letter-spacing: 0.8px;
-        }
-
-        /* Сетка Ростера (Карточки игроков как на EGL) */
-        .egl-roster-flex {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            padding: 16px;
-        }
-
-        .egl-player-card {
-            background-color: #f8fafc;
-            border: 1px solid var(--egl-border);
-            border-radius: 4px;
-            padding: 12px 6px;
-            text-align: center;
-            transition: transform 0.15s ease, border-color 0.15s ease;
-        }
-
-        .egl-player-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--egl-accent-orange);
-            background-color: #ffffff;
-        }
-
-        .egl-player-avatar {
-            width: 100%;
-            height: 64px;
-            background-color: #e2e8f0;
-            border-radius: 4px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: #94a3b8;
-        }
-
-        .egl-player-nick {
-            font-weight: 700;
-            font-size: 13px;
-            color: var(--egl-text-dark);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .egl-player-sub {
-            font-size: 10px;
-            color: var(--egl-text-grey);
-            text-transform: uppercase;
-            margin-top: 2px;
-            font-weight: 600;
-        }
-
-        /* Кастомный пустой лог в стиле EGL */
-        .egl-empty-table-state {
-            padding: 34px;
-            text-align: center;
-            color: var(--egl-text-grey);
-            font-weight: 600;
-            font-size: 13px;
-        }
-
-        .egl-empty-table-state-icon {
-            font-size: 28px;
-            display: block;
-            margin-bottom: 8px;
-            opacity: 0.6;
-        }
-
-        /* Боковое меню статистики */
-        .egl-stat-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 16px;
-            border-bottom: 1px solid #f0f3f7;
-            font-size: 13px;
-        }
-
-        .egl-stat-row:last-child {
-            border-bottom: none;
-        }
-
-        .egl-stat-label {
-            color: var(--egl-text-grey);
-            font-weight: 600;
-        }
-
-        .egl-stat-value {
-            font-weight: 700;
-            color: var(--egl-text-dark);
-        }
-
-        .egl-stat-value.highlight {
-            color: var(--egl-accent-blue);
-        }
-
-        /* Всплывашка уведомлений */
+        /* Всплывашка */
         .dev-toast {
-            position: fixed;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--toast-bg);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-left: 4px solid var(--egl-accent-orange);
-            font-weight: 600;
-            z-index: 1000;
-            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
-            opacity: 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 340px;
-            justify-content: center;
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            background-color: var(--toast-bg); color: white; padding: 14px 28px;
+            border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-left: 4px solid var(--egl-accent-orange); font-weight: 600; z-index: 1000;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease; opacity: 0;
+            display: flex; align-items: center; gap: 12px; min-width: 340px; justify-content: center;
         }
+        .dev-toast.show { bottom: 30px; opacity: 1; }
+        .dev-toast .icon { color: var(--egl-accent-orange); font-size: 18px; }
 
-        .dev-toast.show {
-            bottom: 30px;
-            opacity: 1;
-        }
-
-        .dev-toast .icon {
-            color: var(--egl-accent-orange);
-            font-size: 18px;
-        }
-
-        /* Адаптивность для мобилок */
         @media (max-width: 768px) {
-            .egl-profile-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            .egl-roster-flex {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .egl-profile-grid, .stats-grid-layout { grid-template-columns: 1fr; gap: 15px; }
+            .egl-roster-flex { grid-template-columns: repeat(3, 1fr); }
         }
-
         @media (max-width: 650px) {
             .egl-navbar { padding: 0 12px; }
             .navbar-brand { font-size: 18px; }
@@ -607,31 +443,32 @@
             .team-name { font-size: 14px; }
             .team-players { display: none; }
             .team-stats-cell { min-width: 90px; }
-            
-            .egl-team-header { padding: 16px; gap: 16px; }
-            .egl-team-header-logo { width: 64px; height: 64px; padding: 4px; }
-            .egl-team-header-title { font-size: 20px; margin-bottom: 4px; }
-            .egl-roster-flex { grid-template-columns: repeat(2, 1fr); padding: 10px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Навигация -->
     <div class="egl-navbar">
-        <div class="navbar-brand" onclick="closeTeamProfile()">EGL <span>League</span></div>
+        <div class="navbar-brand" onclick="navigateTo('ranking')">EGL <span>League</span></div>
         <div class="navbar-links">
-            <a href="#" class="active" id="navRatingLink" onclick="closeTeamProfile(); event.preventDefault();">Рейтинг</a>
+            <a href="#" class="active" id="navRating" onclick="navigateTo('ranking'); event.preventDefault();">Рейтинг</a>
+            <a href="#" id="navStats" onclick="navigateTo('stats'); event.preventDefault();">Статистика</a>
             <a href="#" onclick="showDevAlert(event)">Матчи</a>
             <a href="#" onclick="showDevAlert(event)">Турниры</a>
-            <a href="#" onclick="closeTeamProfile(); event.preventDefault();">Команды</a> 
         </div>
     </div>
 
+    <!-- Вторичное инфо-меню -->
     <div class="sub-navbar">
-        <div>Регион: СНГ / Мир</div>
+        <div id="subnavRegion">Регион: СНГ / Мир</div>
         <div class="update-time">Обновлено сегодня</div>
     </div>
-<div id="rankingView" class="main-container">
+
+    <!-- ==========================================
+         ЭКРАН 1: РЕЙТИНГ КОМАНД (ГЛАВНАЯ)
+         ========================================== -->
+    <div id="rankingView" class="main-container">
         <h2 class="ranking-header">Командный рейтинг EGL</h2>
         
         <div class="ranking-box">
@@ -640,6 +477,7 @@
                 <div>Статистика</div>
             </div>
 
+            <!-- Команда 1 -->
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
                 <div class="team-position">#1</div>
                 <div class="team-change">-</div>
@@ -653,11 +491,11 @@
                         <span class="team-name">RAGE TEAM</span>
                     </div>
                     <div class="team-players">
-                        <div class="player-tag"><span>👤</span>Darksouls</div>
-                        <div class="player-tag"><span>👤</span>toriś</div>
-                        <div class="player-tag"><span>👤</span>Ctrl</div>
-                        <div class="player-tag"><span>👤</span>Destroy</div>
-                        <div class="player-tag"><span>👤</span>jn</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Darksouls</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">toriś</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Ctrl</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Destroy</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">jn</div>
                     </div>
                 </div>
 
@@ -672,7 +510,9 @@
                     </div>
                 </div>
             </div>
- <div class="ranked-team-row" onclick="openTeamProfile(this)">
+
+              <!-- Команда 2 -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
                 <div class="team-position">#2</div>
                 <div class="team-change">-</div>
                 
@@ -685,11 +525,11 @@
                         <span class="team-name">TEAM MIDLESS</span>
                     </div>
                     <div class="team-players">
-                        <div class="player-tag"><span>👤</span>sakayuke</div>
-                        <div class="player-tag"><span>👤</span>dr1m</div>
-                        <div class="player-tag"><span>👤</span>lonely</div>
-                        <div class="player-tag"><span>👤</span>vers4sss</div>
-                        <div class="player-tag"><span>👤</span>DelphiDeer</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">sakayuke</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">dr1m</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">lonely</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">vers4sss</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">DelphiDeer</div>
                     </div>
                 </div>
 
@@ -705,6 +545,7 @@
                 </div>
             </div>
 
+            <!-- Команда 3 -->
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
                 <div class="team-position">#3</div>
                 <div class="team-change">-</div>
@@ -718,11 +559,11 @@
                         <span class="team-name">Tauroda</span>
                     </div>
                     <div class="team-players">
-                        <div class="player-tag"><span>👤</span>s3cond</div>
-                        <div class="player-tag"><span>👤</span>r0marss</div>
-                        <div class="player-tag"><span>👤</span>Aymis</div>
-                        <div class="player-tag"><span>👤</span>Werty</div>
-                        <div class="player-tag"><span>👤</span>Tofy</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">s3cond</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">r0marss</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Aymis</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Werty</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Tofy</div>
                     </div>
                 </div>
 
@@ -740,10 +581,13 @@
 
         </div>
     </div>
-  <div id="profileView" class="main-container" style="display: none;">
-        
+
+    <!-- ==========================================
+         ЭКРАН 2: ПРОФИЛЬ КОМАНДЫ
+         ========================================== -->
+    <div id="profileView" class="main-container" style="display: none;">
         <div class="back-link-container">
-            <button class="egl-back-btn" onclick="closeTeamProfile()">← Назад к списку рейтинга</button>
+            <button class="egl-back-btn" onclick="navigateTo('ranking')">← Назад к списку рейтинга</button>
         </div>
 
         <div class="egl-team-header">
@@ -761,13 +605,10 @@
         </div>
 
         <div class="egl-profile-grid">
-            
             <div class="egl-main-column">
-                
                 <div class="egl-card">
                     <div class="egl-card-title">Текущий состав команды</div>
-                    <div class="egl-roster-flex" id="profRoster">
-                        </div>
+                    <div class="egl-roster-flex" id="profRoster"></div>
                 </div>
 
                 <div class="egl-card">
@@ -777,38 +618,53 @@
                         Официальных матчей на лиге еще не сыграно
                     </div>
                 </div>
-
             </div>
 
             <div class="egl-sidebar-column">
-                
                 <div class="egl-card">
                     <div class="egl-card-title">Статистика состава</div>
-                    
-                    <div class="egl-stat-row">
-                        <span class="egl-stat-label">Винрейт матчей</span>
-                        <span class="egl-stat-value">0%</span>
-                    </div>
-                    <div class="egl-stat-row">
-                        <span class="egl-stat-label">Всего игр</span>
-                        <span class="egl-stat-value highlight">0</span>
-                    </div>
-                    <div class="egl-stat-row">
-                        <span class="egl-stat-label">Победы / Поражения</span>
-                        <span class="egl-stat-value">0 / 0</span>
-                    </div>
-                    <div class="egl-stat-row">
-                        <span class="egl-stat-label">Средний K/D команды</span>
-                        <span class="egl-stat-value">-</span>
-                    </div>
-                    <div class="egl-stat-row">
-                        <span class="egl-stat-label">Любимая карта</span>
-                        <span class="egl-stat-value">Нет данных</span>
-                    </div>
+                    <div class="egl-stat-row"><span class="egl-stat-label">Винрейт матчей</span><span class="egl-stat-value">0%</span></div>
+                    <div class="egl-stat-row"><span class="egl-stat-label">Всего игр</span><span class="egl-stat-value highlight">0</span></div>
+                    <div class="egl-stat-row"><span class="egl-stat-label">Победы / Поражения</span><span class="egl-stat-value">0 / 0</span></div>
+                    <div class="egl-stat-row"><span class="egl-stat-label">Средний K/D команды</span><span class="egl-stat-value">-</span></div>
+                    <div class="egl-stat-row"><span class="egl-stat-label">Любимая карта</span><span class="egl-stat-value">Нет данных</span></div>
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- ==========================================
+         ЭКРАН 3: БАЗА ДАННЫХ СТАТИСТИКИ
+         ========================================== -->
+    <div id="statsView" class="main-container" style="display: none;">
+        <h2 class="ranking-header">База данных статистики лиги</h2>
+        
+        <div class="stats-grid-layout">
+            <div class="stats-sidebar-menu">
+                <div class="stats-menu-item active" id="menuTopPlayers" onclick="switchStatsTab('players')">Top players</div>
+                <div class="stats-menu-item" id="menuTopTeams" onclick="switchStatsTab('teams')">Top teams</div>
             </div>
 
+            <div class="ranking-box">
+                <div class="ranking-box-title">
+                    <div id="statsTableTitle">Игроки с лучшей статистикой</div>
+                    <div>CIS РЕГИОН</div>
+                </div>
+                
+                <table class="egl-stats-table" id="statsDataTable">
+                    <thead>
+                        <tr id="statsTableHeader">
+                            <th>Игрок</th>
+                            <th>Команда</th>
+                            <th>Карты</th>
+                            <th>K-D Diff</th>
+                            <th>K/D</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statsTableBody">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -818,36 +674,143 @@
     </div>
 
     <script>
+        // Полная база данных игроков всех 3-х команд
+        const playersData = [
+            // RAGE TEAM
+            { name: "Darksouls", team: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "toriś", team: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "Ctrl", team: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "Destroy", team: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "jn", team: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            // TEAM MIDLESS
+            { name: "sakayuke", team: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "dr1m", team: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "lonely", team: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "vers4sss", team: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "DelphiDeer", team: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            // Tauroda
+            { name: "s3cond", team: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "r0marss", team: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "Aymis", team: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "Werty", team: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
+            { name: "Tofy", team: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" }
+        ];
+
+        const teamsData = [
+            { name: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", flag: "🇪🇺" },
+            { name: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", flag: "🇪🇺" },
+            { name: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", flag: "🇪🇺" }
+        ];
+
         let toastTimeout;
         function showDevAlert(event) {
             if (event) event.preventDefault();
             const toast = document.getElementById('devToast');
             toast.classList.add('show');
             clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3500);
+            toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 3500);
         }
 
-        // Логика перехода в чистый отдельный профиль команды
+        function navigateTo(viewName) {
+            document.getElementById('rankingView').style.display = 'none';
+            document.getElementById('profileView').style.display = 'none';
+            document.getElementById('statsView').style.display = 'none';
+            document.getElementById('navRating').classList.remove('active');
+            document.getElementById('navStats').classList.remove('active');
+
+            if (viewName === 'ranking') {
+                document.getElementById('rankingView').style.display = 'block';
+                document.getElementById('navRating').classList.add('active');
+                document.getElementById('subnavRegion').innerText = "Регион: СНГ / Мир";
+            } else if (viewName === 'stats') {
+                document.getElementById('statsView').style.display = 'block';
+                document.getElementById('navStats').classList.add('active');
+                document.getElementById('subnavRegion').innerText = "База данных статистики лиги";
+                switchStatsTab('players');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function switchStatsTab(tabType) {
+            const playersMenu = document.getElementById('menuTopPlayers');
+            const teamsMenu = document.getElementById('menuTopTeams');
+            const tableTitle = document.getElementById('statsTableTitle');
+            const tableHeader = document.getElementById('statsTableHeader');
+            const tableBody = document.getElementById('statsTableBody');
+
+            playersMenu.classList.remove('active');
+            teamsMenu.classList.remove('active');
+            tableBody.innerHTML = '';
+
+            if (tabType === 'players') {
+                playersMenu.classList.add('active');
+                tableTitle.innerText = "Игроки с лучшей статистикой";
+                tableHeader.innerHTML = `<th>Игрок</th><th>Команда</th><th>Карты</th><th>K-D Diff</th><th>K/D</th>`;
+                
+                playersData.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>
+                            <div class="player-cell-profile">
+                                <span class="flag">${p.flag}</span>
+                                <span>${p.name}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="team-cell-layout">
+                                <div class="team-logo-mini-container">
+                                    <img src="${p.logo}" alt="${p.team}">
+                                </div>
+                                <span>${p.team}</span>
+                            </div>
+                        </td>
+                        <td>${p.maps}</td>
+                        <td class="bold-stat-val">${p.diff >= 0 ? '+' + p.diff : p.diff}</td>
+                        <td class="bold-stat-val">${p.kd}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            } else if (tabType === 'teams') {
+                teamsMenu.classList.add('active');
+                tableTitle.innerText = "Команды с лучшей статистикой";
+                tableHeader.innerHTML = `<th>Команда</th><th>Карты</th><th>K-D Diff</th><th>K/D</th><th>Рейтинг</th>`;
+                
+                teamsData.forEach(t => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>
+                            <div class="player-cell-profile">
+                                <span class="flag">${t.flag}</span>
+                                <div class="team-logo-mini-container">
+                                    <img src="${t.logo}" alt="${t.name}">
+                                </div>
+                                <span style="color: var(--egl-text-dark);">${t.name}</span>
+                            </div>
+                        </td>
+                        <td>${t.maps}</td>
+                        <td class="bold-stat-val" style="color: #22c55e;">${t.diff >= 0 ? '+' + t.diff : t.diff}</td>
+                        <td>${t.kd}</td>
+                        <td class="bold-stat-val" style="color: var(--egl-accent-orange);">${t.rating}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+        }
+
         function openTeamProfile(rowElement) {
             try {
-                // Извлекаем данные напрямую из разметки
                 const pos = rowElement.querySelector('.team-position').innerText;
                 const logoSrc = rowElement.querySelector('img').src;
                 const teamName = rowElement.querySelector('.team-name').innerText;
                 const tier = rowElement.querySelector('.tier-badge').innerText;
                 const points = rowElement.querySelector('.points-count').innerText;
                 
-                // Извлекаем ники игроков
                 const playerTags = rowElement.querySelectorAll('.player-tag');
                 const rosterContainer = document.getElementById('profRoster');
-                rosterContainer.innerHTML = ''; // Чистим ростер перед заполнением
+                rosterContainer.innerHTML = ''; 
                 
                 playerTags.forEach(tag => {
-                    const playerName = tag.innerText.replace('👤', '').trim();
-                    
-                    // Создаем красивую EGL-карточку для каждого игрока
+                    const playerName = tag.innerText.trim();
                     const playerCard = document.createElement('div');
                     playerCard.className = 'egl-player-card';
                     playerCard.innerHTML = `
@@ -858,31 +821,22 @@
                     rosterContainer.appendChild(playerCard);
                 });
 
-                // Подставляем данные в профиль
                 document.getElementById('profPos').innerText = pos;
                 document.getElementById('profLogo').src = logoSrc;
                 document.getElementById('profName').innerText = teamName;
                 document.getElementById('profTier').innerText = tier;
                 document.getElementById('profPoints').innerText = points;
 
-                // Полностью переключаем экраны
                 document.getElementById('rankingView').style.display = 'none';
                 document.getElementById('profileView').style.display = 'block';
-                
-                // Перематываем страницу вверх для бесшовного перехода
                 window.scrollTo(0, 0); 
-            } catch (e) {
-                console.error("Ошибка при генерации профиля: ", e);
-            }
+            } catch (e) { console.error(e); }
         }
 
-        // Логика полного возврата на страницу рейтинга
-        function closeTeamProfile() {
-            document.getElementById('profileView').style.display = 'none';
-            document.getElementById('rankingView').style.display = 'block';
-            window.scrollTo(0, 0);
+        function goToPlayerStats(event) {
+            event.stopPropagation();
+            navigateTo('stats');
         }
     </script>
-
 </body>
 </html>
