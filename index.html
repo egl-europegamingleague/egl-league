@@ -32,6 +32,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             font-size: 14px;
             padding-bottom: 60px;
+            overflow-x: hidden;
         }
 
         /* Верхняя навигационная панель */
@@ -65,44 +66,109 @@
             color: var(--egl-accent-orange);
         }
 
-        .navbar-links {
+        /* Кнопка Бургер-меню */
+        .hamburger-btn {
             display: flex;
-            gap: 4px;
-            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 22px;
+            height: 16px;
+            cursor: pointer;
+            z-index: 110;
         }
 
-        .navbar-links a {
+        .hamburger-btn span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 2px;
+            transition: all 0.25s ease-in-out;
+        }
+
+        /* Анимация превращения в крестик */
+        .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+        .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* Выезжающая шторка навигации */
+        .navbar-drawer {
+            position: fixed;
+            top: 54px;
+            right: -280px;
+            width: 280px;
+            height: calc(100vh - 54px);
+            background-color: var(--egl-nav-bg);
+            border-left: 2px solid var(--egl-accent-blue);
+            box-shadow: -4px 4px 12px rgba(0,0,0,0.15);
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 105;
+            padding: 15px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-drawer.open {
+            right: 0;
+        }
+
+        .drawer-item {
             color: #9aa4af;
-            text-decoration: none;
-            font-weight: 700;
             font-size: 13px;
+            font-weight: 700;
             text-transform: uppercase;
-            padding: 0 16px;
-            display: flex;
-            align-items: center;
+            padding: 14px 24px;
+            cursor: pointer;
             transition: all 0.2s ease;
-            position: relative;
-            height: 100%;
+            letter-spacing: 0.5px;
         }
 
-        .navbar-links a:hover {
+        .drawer-item:hover {
             color: #ffffff;
             background-color: rgba(255,255,255,0.03);
         }
 
-        .navbar-links a.active {
-            color: #ffffff;
-            background-color: rgba(93, 121, 174, 0.15);
+        .drawer-item.has-submenu {
+            padding: 0;
         }
 
-        .navbar-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: var(--egl-accent-orange);
+        .submenu-title {
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .submenu-title .arrow {
+            font-size: 10px;
+            transition: transform 0.2s ease;
+            color: var(--egl-text-grey);
+        }
+
+        .drawer-submenu {
+            max-height: 0;
+            overflow: hidden;
+            background-color: var(--egl-subnav-bg);
+            transition: max-height 0.25s ease-out;
+        }
+
+        .drawer-submenu.open {
+            max-height: 120px;
+        }
+
+        .submenu-item {
+            color: #838e9d;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 11px 36px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .submenu-item:hover {
+            color: #ffffff;
+            background-color: rgba(255,255,255,0.02);
         }
 
         /* Вторичное меню */
@@ -286,12 +352,6 @@
             color: #ffffff;
             border-color: var(--egl-accent-blue);
         }
-        
-        .player-tag span {
-            margin-right: 4px;
-            font-size: 11px;
-            opacity: 0.6;
-        }
 
         .team-stats-cell {
             display: flex;
@@ -386,9 +446,7 @@
         .egl-stat-value { font-weight: 700; color: var(--egl-text-dark); }
         .egl-stat-value.highlight { color: var(--egl-accent-blue); }
 
-        /* ========================================================
-           СТИЛИ ДЛЯ БАЗЫ ДАННЫХ СТАТИСТИКИ (STATS VIEW)
-           ======================================================== */
+        /* База данных статистики (STATS VIEW) */
         .stats-grid-layout { display: grid; grid-template-columns: 240px 1fr; gap: 20px; }
         .stats-sidebar-menu { background-color: var(--egl-box-bg); border: 1px solid var(--egl-border); border-radius: 4px; overflow: hidden; }
         .stats-menu-item { padding: 14px 18px; font-size: 13px; font-weight: 700; color: var(--egl-text-dark); cursor: pointer; border-bottom: 1px solid var(--egl-border); transition: all 0.15s ease; }
@@ -402,19 +460,237 @@
         .egl-stats-table tr:hover td { background-color: var(--egl-row-hover); }
 
         .player-cell-profile { display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--egl-accent-blue); }
-        .player-cell-profile .flag { font-size: 15px; display: inline-flex; align-items: center; }
         
-        /* Исправленный контейнер мини-логотипа в таблице */
         .team-logo-mini-container {
             width: 26px; height: 26px; background-color: #0d0f12;
             border: 1px solid var(--egl-border); border-radius: 4px;
             display: inline-flex; align-items: center; justify-content: center;
-            overflow: hidden; vertical-align: middle;
+            overflow: hidden; vertical-align: middle; flex-shrink: 0;
         }
         .team-logo-mini-container img { width: 100%; height: 100%; object-fit: contain; }
-
         .team-cell-layout { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--egl-text-dark); }
         .bold-stat-val { font-weight: 700; }
+
+        /* Раздел расписания */
+        .egl-schedule-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .egl-tournament-card {
+            background-color: var(--egl-box-bg);
+            border: 1px solid var(--egl-border);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+
+        .egl-tournament-header {
+            background-color: #f8fafc;
+            border-bottom: 1px solid var(--egl-border);
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tournament-title-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--egl-text-grey);
+            letter-spacing: 0.5px;
+        }
+
+        .tournament-title-info::before {
+            content: '🏆';
+            font-size: 12px;
+        }
+
+        .tournament-arrow-toggle {
+            font-size: 10px;
+            color: var(--egl-text-grey);
+            opacity: 0.7;
+        }
+
+        .egl-match-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #edf2f7;
+            transition: background-color 0.15s ease;
+            cursor: pointer;
+        }
+
+        .egl-match-row:last-child {
+            border-bottom: none;
+        }
+
+        .egl-match-row:hover {
+            background-color: var(--egl-row-hover);
+        }
+
+        .match-time-cell {
+            width: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            border-right: 1px solid #edf2f7;
+            padding-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .match-time-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--egl-text-dark);
+            line-height: 1.2;
+        }
+
+        .match-format-badge {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--egl-text-grey);
+            background-color: #eef2f6;
+            padding: 1px 5px;
+            border-radius: 2px;
+            margin-top: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            border: 1px solid #d3dee0;
+        }
+
+        .match-teams-cell {
+            flex-grow: 1;
+            padding-left: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .match-team-row-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+          .match-team-name-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--egl-text-dark);
+        }
+
+        .match-action-cell {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-left: 10px;
+        }
+
+        .match-analytics-btn {
+            background-color: #ffffff;
+            border: 1px solid var(--egl-border);
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--egl-text-grey);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        .match-analytics-btn:hover {
+            background-color: var(--egl-accent-blue);
+            color: #ffffff;
+            border-color: var(--egl-accent-blue);
+        }
+
+        /* Детали матча (MATCH DETAILS) */
+        .match-header-panel {
+            background-color: #ffffff;
+            border: 1px solid var(--egl-border);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .match-header-bg-EU {
+            background-image: linear-gradient(to right, rgba(22, 31, 43, 0.85), rgba(22, 31, 43, 0.3)), url('https://i.postimg.cc/6p5JVPGs/EU.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .match-header-bg-PL {
+    background-image: linear-gradient(to left, rgba(22, 31, 43, 0.85), rgba(22, 31, 43, 0.3)), url('https://i.postimg.cc/ZRrTRDMg/PL.png');
+    background-size: cover;
+    background-position: center;
+}
+
+        .match-header-team-col {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+
+        .match-header-team-col.team2-col {
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .match-header-logo-container {
+            width: 80px; height: 80px;
+            background-color: #0d0f12; border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; padding: 6px; flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .match-header-logo-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        .match-header-team-name {
+            font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        .match-header-center-col {
+            text-align: center;
+            padding: 20px 40px;
+            background-color: #ffffff;
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+        }
+
+        .match-header-time-val { font-size: 30px; font-weight: 800; color: var(--egl-text-dark); }
+        .match-header-date-val { font-size: 13px; color: var(--egl-text-grey); font-weight: 600; }
+        .match-header-tournament-title {
+            font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--egl-text-grey); letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--egl-accent-orange); padding-bottom: 2px;
+        }
+
+        .match-body-panel {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+        }
+
+        .maps-info-pill {
+            background-color: #eef2f6; border-radius: 3px; border: 1px solid #d3dee0; padding: 12px;
+            font-size: 13px; color: var(--egl-text-dark);
+        }
+        .maps-info-pill strong { color: var(--egl-text-grey); text-transform: uppercase; }
+
+        .winner-pick-card .progress-line { height: 10px; background-color: #f1f3f6; border-radius: 5px; overflow: hidden; margin: 12px 0; }
+        .progress-bar-inner { height: 100%; background-color: var(--egl-accent-blue); border-radius: 5px 0 0 5px; }
 
         /* Всплывашка */
         .dev-toast {
@@ -429,13 +705,16 @@
         .dev-toast .icon { color: var(--egl-accent-orange); font-size: 18px; }
 
         @media (max-width: 768px) {
-            .egl-profile-grid, .stats-grid-layout { grid-template-columns: 1fr; gap: 15px; }
+            .egl-profile-grid, .stats-grid-layout, .match-body-panel { grid-template-columns: 1fr; gap: 15px; }
             .egl-roster-flex { grid-template-columns: repeat(3, 1fr); }
+            .match-header-panel { grid-template-columns: 1fr; }
+            .match-header-center-col { order: -1; padding: 20px; border-bottom: 1px solid var(--egl-border); }
+            .match-header-team-col { padding: 20px; align-items: center; text-align: center; background-position: center; }
+            .match-header-team-col.team2-col { background-image: linear-gradient(to right, rgba(22, 31, 43, 0.85), rgba(22, 31, 43, 0.3)), url('https://i.postimg.cc/g2C0MdyL/PL.gif'); }
         }
         @media (max-width: 650px) {
-            .egl-navbar { padding: 0 12px; }
+            .egl-navbar { padding: 0 16px; }
             .navbar-brand { font-size: 18px; }
-            .navbar-links a { font-size: 11px; padding: 0 8px; }
             .ranked-team-row { padding: 12px 10px; }
             .team-position { width: 30px; font-size: 16px; }
             .team-change { width: 20px; font-size: 11px; margin-right: 5px; }
@@ -447,49 +726,51 @@
     </style>
 </head>
 <body>
-
-    <!-- Навигация -->
-    <div class="egl-navbar">
+ <div class="egl-navbar">
         <div class="navbar-brand" onclick="navigateTo('ranking')">EGL <span>League</span></div>
-        <div class="navbar-links">
-            <a href="#" class="active" id="navRating" onclick="navigateTo('ranking'); event.preventDefault();">Рейтинг</a>
-            <a href="#" id="navStats" onclick="navigateTo('stats'); event.preventDefault();">Статистика</a>
-            <a href="#" onclick="showDevAlert(event)">Матчи</a>
-            <a href="#" onclick="showDevAlert(event)">Турниры</a>
+        <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
 
-    <!-- Вторичное инфо-меню -->
+    <div class="navbar-drawer" id="navbarDrawer">
+        <div class="drawer-item" onclick="navigateFromDrawer('ranking')">Командный рейтинг</div>
+        <div class="drawer-item has-submenu">
+            <div class="submenu-title" onclick="toggleSubmenu(event)">
+                <span>Статистика</span>
+                <span class="arrow" id="submenuArrow">▼</span>
+            </div>
+            <div class="drawer-submenu" id="drawerSubmenu">
+                <div class="submenu-item" onclick="navigateFromDrawer('stats', 'players')">Топ игроков</div>
+                <div class="submenu-item" onclick="navigateFromDrawer('stats', 'teams')">Топ команд</div>
+            </div>
+        </div>
+        <div class="drawer-item" onclick="navigateFromDrawer('schedule')">Расписание</div>
+    </div>
+
     <div class="sub-navbar">
         <div id="subnavRegion">Регион: СНГ / Мир</div>
         <div class="update-time">Обновлено сегодня</div>
     </div>
 
-    <!-- ==========================================
-         ЭКРАН 1: РЕЙТИНГ КОМАНД (ГЛАВНАЯ)
-         ========================================== -->
     <div id="rankingView" class="main-container">
         <h2 class="ranking-header">Командный рейтинг EGL</h2>
-        
         <div class="ranking-box">
             <div class="ranking-box-title">
                 <div>Текущее положение команд</div>
                 <div>Статистика</div>
             </div>
 
-            <!-- Команда 1 -->
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
                 <div class="team-position">#1</div>
                 <div class="team-change">-</div>
-                
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg" alt="RAGE TEAM">
                 </div>
-
                 <div class="team-main-info">
-                    <div class="team-identity">
-                        <span class="team-name">RAGE TEAM</span>
-                    </div>
+                    <div class="team-identity"><span class="team-name">RAGE TEAM</span></div>
                     <div class="team-players">
                         <div class="player-tag" onclick="goToPlayerStats(event)">Darksouls</div>
                         <div class="player-tag" onclick="goToPlayerStats(event)">toriś</div>
@@ -498,32 +779,20 @@
                         <div class="player-tag" onclick="goToPlayerStats(event)">jn</div>
                     </div>
                 </div>
-
                 <div class="team-stats-cell">
-                    <div class="stat-row-block">
-                        <span class="stat-row-label">Тир лига</span>
-                        <span class="stat-row-value tier-badge">Tier 3</span>
-                    </div>
-                    <div class="stat-row-block">
-                        <span class="stat-row-label">Очки</span>
-                        <span class="stat-row-value points-count">0</span>
-                    </div>
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
                 </div>
             </div>
 
-              <!-- Команда 2 -->
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
                 <div class="team-position">#2</div>
                 <div class="team-change">-</div>
-                
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png" alt="TEAM MIDLESS">
                 </div>
-
                 <div class="team-main-info">
-                    <div class="team-identity">
-                        <span class="team-name">TEAM MIDLESS</span>
-                    </div>
+                    <div class="team-identity"><span class="team-name">TEAM MIDLESS</span></div>
                     <div class="team-players">
                         <div class="player-tag" onclick="goToPlayerStats(event)">sakayuke</div>
                         <div class="player-tag" onclick="goToPlayerStats(event)">dr1m</div>
@@ -532,32 +801,20 @@
                         <div class="player-tag" onclick="goToPlayerStats(event)">DelphiDeer</div>
                     </div>
                 </div>
-
                 <div class="team-stats-cell">
-                    <div class="stat-row-block">
-                        <span class="stat-row-label">Тир лига</span>
-                        <span class="stat-row-value tier-badge">Tier 3</span>
-                    </div>
-                    <div class="stat-row-block">
-                        <span class="stat-row-label">Очки</span>
-                        <span class="stat-row-value points-count">0</span>
-                    </div>
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
                 </div>
             </div>
 
-            <!-- Команда 3 -->
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
                 <div class="team-position">#3</div>
                 <div class="team-change">-</div>
-                
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/65GXdzfq/Tauroda.jpg" alt="Tauroda">
                 </div>
-
                 <div class="team-main-info">
-                    <div class="team-identity">
-                        <span class="team-name">Tauroda</span>
-                    </div>
+                    <div class="team-identity"><span class="team-name">Tauroda</span></div>
                     <div class="team-players">
                         <div class="player-tag" onclick="goToPlayerStats(event)">s3cond</div>
                         <div class="player-tag" onclick="goToPlayerStats(event)">r0marss</div>
@@ -566,34 +823,20 @@
                         <div class="player-tag" onclick="goToPlayerStats(event)">Tofy</div>
                     </div>
                 </div>
-
                 <div class="team-stats-cell">
-                    <div class="stat-row-block">
-                        <span class="stat-row-label">Тир лига</span>
-                        <span class="stat-row-value tier-badge">Tier 3</span>
-                    </div>
-                    <div class="stat-row-block">
-                        <span class="stat-row-label">Очки</span>
-                        <span class="stat-row-value points-count">0</span>
-                    </div>
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- ==========================================
-         ЭКРАН 2: ПРОФИЛЬ КОМАНДЫ
-         ========================================== -->
     <div id="profileView" class="main-container" style="display: none;">
         <div class="back-link-container">
             <button class="egl-back-btn" onclick="navigateTo('ranking')">← Назад к списку рейтинга</button>
         </div>
-
         <div class="egl-team-header">
-            <div class="egl-team-header-logo">
-                <img id="profLogo" src="" alt="Логотип">
-            </div>
+            <div class="egl-team-header-logo"><img id="profLogo" src="" alt="Логотип"></div>
             <div class="egl-team-header-info">
                 <h1 id="profName" class="egl-team-header-title">Название</h1>
                 <div class="egl-team-header-meta">
@@ -603,23 +846,17 @@
                 </div>
             </div>
         </div>
-
         <div class="egl-profile-grid">
             <div class="egl-main-column">
                 <div class="egl-card">
                     <div class="egl-card-title">Текущий состав команды</div>
                     <div class="egl-roster-flex" id="profRoster"></div>
                 </div>
-
                 <div class="egl-card">
                     <div class="egl-card-title">История матчей команды</div>
-                    <div class="egl-empty-table-state">
-                        <span class="egl-empty-table-state-icon">📅</span>
-                        Официальных матчей на лиге еще не сыграно
-                    </div>
+                    <div class="egl-empty-table-state"><span class="egl-empty-table-state-icon">📅</span>Официальных матчей на лиге еще не сыграно</div>
                 </div>
             </div>
-
             <div class="egl-sidebar-column">
                 <div class="egl-card">
                     <div class="egl-card-title">Статистика состава</div>
@@ -633,62 +870,104 @@
         </div>
     </div>
 
-    <!-- ==========================================
-         ЭКРАН 3: БАЗА ДАННЫХ СТАТИСТИКИ
-         ========================================== -->
     <div id="statsView" class="main-container" style="display: none;">
         <h2 class="ranking-header">База данных статистики лиги</h2>
-        
         <div class="stats-grid-layout">
             <div class="stats-sidebar-menu">
                 <div class="stats-menu-item active" id="menuTopPlayers" onclick="switchStatsTab('players')">Top players</div>
                 <div class="stats-menu-item" id="menuTopTeams" onclick="switchStatsTab('teams')">Top teams</div>
             </div>
-
             <div class="ranking-box">
-                <div class="ranking-box-title">
-                    <div id="statsTableTitle">Игроки с лучшей статистикой</div>
-                    <div>CIS РЕГИОН</div>
-                </div>
-                
+                <div class="ranking-box-title"><div id="statsTableTitle">Игроки с лучшей статистикой</div><div>CIS РЕГИОН</div></div>
                 <table class="egl-stats-table" id="statsDataTable">
                     <thead>
                         <tr id="statsTableHeader">
-                            <th>Игрок</th>
-                            <th>Команда</th>
-                            <th>Карты</th>
-                            <th>K-D Diff</th>
-                            <th>K/D</th>
+                            <th>Игрок</th><th>Команда</th><th>Карты</th><th>K-D Diff</th><th>K/D</th>
                         </tr>
                     </thead>
-                    <tbody id="statsTableBody">
-                    </tbody>
+                    <tbody id="statsTableBody"></tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <div id="devToast" class="dev-toast">
-        <span class="icon">⚠️</span>
-        <span>Раздел находится в разработке.</span>
+    <div id="scheduleView" class="main-container" style="display: none;">
+        <h2 class="ranking-header">Предстоящие матчи лиги</h2>
+        <div class="egl-schedule-container" id="scheduleMatchesContainer"></div>
     </div>
 
-    <script>
-        // Полная база данных игроков всех 3-х команд
+    <div id="matchDetailView" class="main-container" style="display: none;">
+        <div class="back-link-container">
+            <button class="egl-back-btn" onclick="navigateTo('schedule')">← К расписанию</button>
+        </div>
+
+        <div class="match-header-panel">
+            <div class="match-header-team-col team1-col match-header-bg-EU">
+                <div class="match-header-logo-container"><img id="mdLogo1" src="" alt="Лого1"></div>
+                <div class="match-header-team-name" id="mdName1">RAGE TEAM</div>
+            </div>
+            
+            <div class="match-header-center-col">
+                <div class="match-header-tournament-title" id="mdTournament">Tournament Name</div>
+                <div class="match-header-time-val" id="mdTimeVal">15:00</div>
+                <div class="match-header-date-val" id="mdDateVal">00.00.0000</div>
+            </div>
+
+            <div class="match-header-team-col team2-col match-header-bg-PL">
+                <div class="match-header-logo-container"><img id="mdLogo2" src="" alt="Лого2"></div>
+                <div class="match-header-team-name" id="mdName2">TEAM MIDLESS</div>
+            </div>
+        </div>
+
+        <div class="match-body-panel">
+            <div class="info-match-card">
+                <div class="egl-card">
+                    <div class="egl-card-title">Match Information</div>
+                    <div style="padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                        <div class="maps-info-pill">
+                            <strong>Format:</strong> <span id="mdFormat">bo3</span>
+                        </div>
+                        <div class="maps-info-pill">
+                            <strong>Status:</strong> Friendly match
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-info-card">
+                <div class="egl-card winner-pick-card">
+                    <div class="egl-card-title">Pick a winner (Шансы)</div>
+                    <div style="padding: 16px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: var(--egl-text-grey); text-transform: uppercase;">
+                            <span id="mdWinnerLabel1">RAGE TEAM</span>
+                            <span id="mdWinnerLabel2">TEAM MIDLESS</span>
+                        </div>
+                        <div class="progress-line">
+                            <div class="progress-bar-inner" style="width: 50%;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 800; color: var(--egl-text-dark);">
+                            <span>50.0%</span>
+                            <span>50.0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="devToast" class="dev-toast"><span class="icon">⚠️</span><span>Раздел находится в разработке.</span></div>
+<script>
         const playersData = [
-            // RAGE TEAM
             { name: "Darksouls", team: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: 0, kd: "0.00", flag: "https://i.postimg.cc/76yfLDbF/KZ.gif" },
             { name: "toriś", team: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: 0, kd: "0.00", flag: "https://i.postimg.cc/L5xdGkrQ/UA.gif" },
             { name: "Ctrl", team: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
             { name: "Destroy", team: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
             { name: "jn", team: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: 0, kd: "0.00", flag: "https://i.postimg.cc/FHQqGBdr/BY.gif" },
-            // TEAM MIDLESS
             { name: "sakayuke", team: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: 0, kd: "0.00", flag: "https://i.postimg.cc/L5xdGkrQ/UA.gif" },
             { name: "dr1m", team: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: 0, kd: "0.00", flag: "https://i.postimg.cc/L5xdGkrQ/UA.gif" },
             { name: "lonely", team: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: 0, kd: "0.00", flag: "https://i.postimg.cc/L5xdGkrQ/UA.gif" },
             { name: "vers4sss", team: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: 0, kd: "0.00", flag: "https://i.postimg.cc/L5xdGkrQ/UA.gif" },
             { name: "DelphiDeer", team: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: 0, kd: "0.00", flag: "https://i.postimg.cc/L5xdGkrQ/UA.gif" },
-            // Tauroda
             { name: "s3cond", team: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
             { name: "r0marss", team: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
             { name: "Aymis", team: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: 0, kd: "0.00", flag: "🇪🇺" },
@@ -697,9 +976,22 @@
         ];
 
         const teamsData = [
-            { name: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", flag: "🇪🇺" },
-            { name: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", flag: "🇵🇱" },
-            { name: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", flag: "🇪🇺" }
+            { name: "RAGE TEAM", logo: "https://i.postimg.cc/05G83Vwg/IMG-20260608-005318-638-1.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "EU" },
+            { name: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "Польша" },
+            { name: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "🇪🇺" }
+        ];
+
+        const matchesData = [
+            { 
+                id: 1,
+                tournament: "EGL Friendly Match", 
+                date: "08 июня 2026",
+                time: "15:00", 
+                format: "bo3", 
+                team1: "RAGE TEAM", 
+                team2: "TEAM MIDLESS",
+                pick: "50/50"
+            }
         ];
 
         let toastTimeout;
@@ -711,24 +1003,135 @@
             toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 3500);
         }
 
+        function toggleMenu() {
+            document.getElementById('hamburgerBtn').classList.toggle('open');
+            document.getElementById('navbarDrawer').classList.toggle('open');
+        }
+
+        function toggleSubmenu(event) {
+            event.stopPropagation();
+            document.getElementById('drawerSubmenu').classList.toggle('open');
+            const arrow = document.getElementById('submenuArrow');
+            arrow.style.transform = document.getElementById('drawerSubmenu').classList.contains('open') ? "rotate(180deg)" : "rotate(0deg)";
+        }
+
+        function navigateFromDrawer(viewName, tabType) {
+            toggleMenu();
+            navigateTo(viewName);
+            if (viewName === 'stats' && tabType) {
+                switchStatsTab(tabType);
+            }
+        }
+
         function navigateTo(viewName) {
             document.getElementById('rankingView').style.display = 'none';
             document.getElementById('profileView').style.display = 'none';
             document.getElementById('statsView').style.display = 'none';
-            document.getElementById('navRating').classList.remove('active');
-            document.getElementById('navStats').classList.remove('active');
+            document.getElementById('scheduleView').style.display = 'none';
+            document.getElementById('matchDetailView').style.display = 'none';
 
             if (viewName === 'ranking') {
                 document.getElementById('rankingView').style.display = 'block';
-                document.getElementById('navRating').classList.add('active');
                 document.getElementById('subnavRegion').innerText = "Регион: СНГ / Мир";
             } else if (viewName === 'stats') {
                 document.getElementById('statsView').style.display = 'block';
-                document.getElementById('navStats').classList.add('active');
                 document.getElementById('subnavRegion').innerText = "База данных статистики лиги";
-                switchStatsTab('players');
+            } else if (viewName === 'schedule') {
+                document.getElementById('scheduleView').style.display = 'block';
+                document.getElementById('subnavRegion').innerText = "Расписание матчей лиги";
+                renderSchedule();
+            } else if (viewName === 'matchDetail') {
+                document.getElementById('matchDetailView').style.display = 'block';
+                document.getElementById('subnavRegion').innerText = "Детали матча";
             }
             window.scrollTo(0, 0);
+        }
+
+        function renderSchedule() {
+            const container = document.getElementById('scheduleMatchesContainer');
+            container.innerHTML = '';
+
+            if (matchesData.length === 0) {
+                container.innerHTML = '<div class="egl-empty-table-state">Предстоящих матчей не запланировано</div>';
+                return;
+            }
+
+            const groupedMatches = {};
+            matchesData.forEach(match => {
+                if (!groupedMatches[match.tournament]) groupedMatches[match.tournament] = [];
+                groupedMatches[match.tournament].push(match);
+            });
+
+            for (const tournamentName in groupedMatches) {
+                const tournamentCard = document.createElement('div');
+                tournamentCard.className = 'egl-tournament-card';
+
+                let matchesHTML = '';
+                groupedMatches[tournamentName].forEach(match => {
+                    const t1Obj = teamsData.find(t => t.name.toUpperCase() === match.team1.toUpperCase());
+                    const logo1 = t1Obj ? t1Obj.logo : '';
+                    const t2Obj = teamsData.find(t => t.name.toUpperCase() === match.team2.toUpperCase());
+                    const logo2 = t2Obj ? t2Obj.logo : '';
+
+                    matchesHTML += `
+                        <div class="egl-match-row" onclick="openMatchDetails(${match.id})">
+                            <div class="match-time-cell">
+                                <span class="match-time-value">${match.time}</span>
+                                <span class="match-format-badge">bo3</span>
+                            </div>
+                            <div class="match-teams-cell">
+                                <div class="match-team-row-line">
+                                    <div class="team-logo-mini-container"><img src="${logo1}" alt="${match.team1}"></div>
+                                    <span class="match-team-name-text">${match.team1}</span>
+                                </div>
+                                <div class="match-team-row-line">
+                                    <div class="team-logo-mini-container"><img src="${logo2}" alt="${match.team2}"></div>
+                                    <span class="match-team-name-text">${match.team2}</span>
+                                </div>
+                            </div>
+                            <div class="match-action-cell">
+                                <button class="match-analytics-btn" onclick="showDevAlert(event)">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                tournamentCard.innerHTML = `
+                    <div class="egl-tournament-header">
+                        <div class="tournament-title-info">${tournamentName}</div>
+                        <div class="tournament-arrow-toggle">▼</div>
+                    </div>
+                    <div class="egl-tournament-content">${matchesHTML}</div>
+                `;
+                container.appendChild(tournamentCard);
+            }
+        }
+
+        function openMatchDetails(matchId) {
+            const match = matchesData.find(m => m.id === matchId);
+            if (!match) return;
+
+            const t1Obj = teamsData.find(t => t.name.toUpperCase() === match.team1.toUpperCase());
+            const t2Obj = teamsData.find(t => t.name.toUpperCase() === match.team2.toUpperCase());
+            if (!t1Obj || !t2Obj) return;
+
+            document.getElementById('mdTournament').innerText = match.tournament;
+            document.getElementById('mdTimeVal').innerText = match.time;
+            document.getElementById('mdDateVal').innerText = match.date;
+            
+            document.getElementById('mdLogo1').src = t1Obj.logo;
+            document.getElementById('mdName1').innerHTML = t1Obj.name;
+            
+            document.getElementById('mdLogo2').src = t2Obj.logo;
+            document.getElementById('mdName2').innerHTML = t2Obj.name;
+            
+            document.getElementById('mdFormat').innerText = match.format;
+            document.getElementById('mdWinnerLabel1').innerText = t1Obj.name;
+            document.getElementById('mdWinnerLabel2').innerText = t2Obj.name;
+
+            navigateTo('matchDetail');
         }
 
         function switchStatsTab(tabType) {
@@ -746,47 +1149,37 @@
                 playersMenu.classList.add('active');
                 tableTitle.innerText = "Игроки с лучшей статистикой";
                 tableHeader.innerHTML = `<th>Игрок</th><th>Команда</th><th>Карты</th><th>K-D Diff</th><th>K/D</th>`;
-playersData.forEach(p => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-        <td>
-            <div class="player-cell-profile">
-                <span class="flag">
-                    <img src="${p.flag}" alt="flag" style="width: 20px; height: 13px; object-fit: cover; border: 1px solid #161f2b; border-radius: 1px; display: block;">
-                </span>
-                <span>${p.name}</span>
-            </div>
-        </td>
-        <td>
-            <div class="team-cell-layout">
-                <div class="team-logo-mini-container">
-                    <img src="${p.logo}" alt="${p.team}">
-                </div>
-                <span>${p.team}</span>
-            </div>
-        </td>
-        <td>${p.maps}</td>
-        <td class="bold-stat-val">${p.diff >= 0 ? '+' + p.diff : p.diff}</td>
-        <td class="bold-stat-val">${p.kd}</td>
-    `;
-    tableBody.appendChild(tr);
-});
-
-
+                playersData.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>
+                            <div class="player-cell-profile">
+                                <span class="flag"><img src="${p.flag}" alt="flag" style="width: 20px; height: 13px; object-fit: cover; border: 1px solid #161f2b; border-radius: 1px; display: block;"></span>
+                                <span>${p.name}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="team-cell-layout">
+                                <div class="team-logo-mini-container"><img src="${p.logo}" alt="${p.team}"></div>
+                                <span>${p.team}</span>
+                            </div>
+                        </td>
+                        <td>${p.maps}</td>
+                        <td class="bold-stat-val">${p.diff >= 0 ? '+' + p.diff : p.diff}</td>
+                        <td class="bold-stat-val">${p.kd}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
             } else if (tabType === 'teams') {
                 teamsMenu.classList.add('active');
                 tableTitle.innerText = "Команды с лучшей статистикой";
                 tableHeader.innerHTML = `<th>Команда</th><th>Карты</th><th>K-D Diff</th><th>K/D</th><th>Рейтинг</th>`;
-                
                 teamsData.forEach(t => {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td>
                             <div class="player-cell-profile">
-                                <span class="flag">${t.flag}</span>
-                                <div class="team-logo-mini-container">
-                                    <img src="${t.logo}" alt="${t.name}">
-                                </div>
+                                <div class="team-logo-mini-container"><img src="${t.logo}" alt="${t.name}"></div>
                                 <span style="color: var(--egl-text-dark);">${t.name}</span>
                             </div>
                         </td>
@@ -839,6 +1232,7 @@ playersData.forEach(p => {
         function goToPlayerStats(event) {
             event.stopPropagation();
             navigateTo('stats');
+            switchStatsTab('players');
         }
     </script>
 </body>
