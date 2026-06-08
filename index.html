@@ -6,17 +6,17 @@
     <title>EGL League | Мировой Рейтинг Команд</title>
     <style>
         :root {
-            --hltv-bg: #f4f5f7;
-            --hltv-nav-bg: #161f2b;
-            --hltv-subnav-bg: #212c3d;
-            --hltv-box-bg: #ffffff;
-            --hltv-box-header: #e6e9ee;
-            --hltv-border: #cbd3de;
-            --hltv-text-dark: #1b222c;
-            --hltv-text-grey: #626d7c;
-            --hltv-accent-blue: #3c5685;
-            --hltv-accent-orange: #e56b1f;
-            --hltv-row-hover: #f0f3f7;
+            --egl-bg: #f4f5f7;
+            --egl-nav-bg: #161f2b;
+            --egl-subnav-bg: #212c3d;
+            --egl-box-bg: #ffffff;
+            --egl-box-header: #e6e9ee;
+            --egl-border: #cbd3de;
+            --egl-text-dark: #1b222c;
+            --egl-text-grey: #626d7c;
+            --egl-accent-blue: #3c5685;
+            --egl-!accent-orange: #e56b1f;
+            --egl-row-hover: #f0f3f7;
             --toast-bg: #1e293b;
         }
 
@@ -27,22 +27,22 @@
         }
 
         body {
-            background-color: var(--hltv-bg);
-            color: var(--hltv-text-dark);
+            background-color: var(--egl-bg);
+            color: var(--egl-text-dark);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             font-size: 14px;
             padding-bottom: 60px;
         }
 
         /* Верхняя навигационная панель */
-        .hltv-navbar {
-            background-color: var(--hltv-nav-bg);
+        .egl-navbar {
+            background-color: var(--egl-nav-bg);
             height: 54px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 24px;
-            border-bottom: 2px solid var(--hltv-accent-blue);
+            border-bottom: 2px solid var(--egl-accent-blue);
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             position: sticky;
             top: 0;
@@ -62,7 +62,7 @@
         }
 
         .navbar-brand span {
-            color: var(--hltv-accent-orange);
+            color: var(--egl-accent-orange);
         }
 
         .navbar-links {
@@ -102,17 +102,17 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background-color: var(--hltv-accent-orange);
+            background-color: var(--egl-accent-orange);
         }
 
         /* Вторичное меню */
         .sub-navbar {
-            background-color: var(--hltv-subnav-bg);
+            background-color: var(--egl-subnav-bg);
             padding: 14px 24px;
             font-size: 12px;
             font-weight: 600;
             color: #9aa4af;
-            border-bottom: 1px solid var(--hltv-border);
+            border-bottom: 1px solid var(--egl-border);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -121,7 +121,7 @@
 
         .sub-navbar .update-time {
             background-color: rgba(229, 107, 31, 0.12);
-            color: var(--hltv-accent-orange);
+            color: var(--egl-accent-orange);
             padding: 4px 10px;
             border-radius: 4px;
             font-weight: 700;
@@ -138,9 +138,9 @@
             display: inline-block;
             width: 6px;
             height: 6px;
-            background-color: var(--hltv-accent-orange);
+            background-color: var(--egl-accent-orange);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--hltv-accent-orange);
+            box-shadow: 0 0 8px var(--egl-accent-orange);
         }
 
         /* Основной контейнер */
@@ -154,29 +154,29 @@
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 20px;
-            color: var(--hltv-text-dark);
-            border-left: 5px solid var(--hltv-accent-blue);
+            color: var(--egl-text-dark);
+            border-left: 5px solid var(--egl-accent-blue);
             padding-left: 12px;
             letter-spacing: 0.5px;
         }
 
         /* Таблица рейтинга */
         .ranking-box {
-            background-color: var(--hltv-box-bg);
-            border: 1px solid var(--hltv-border);
+            background-color: var(--egl-box-bg);
+            border: 1px solid var(--egl-border);
             border-radius: 4px;
             overflow: hidden;
             box-shadow: 0 2px 6px rgba(0,0,0,0.06);
         }
 
         .ranking-box-title {
-            background-color: var(--hltv-box-header);
+            background-color: var(--egl-box-header);
             padding: 12px 20px;
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            color: var(--hltv-text-grey);
-            border-bottom: 1px solid var(--hltv-border);
+            color: var(--egl-text-grey);
+            border-bottom: 1px solid var(--egl-border);
             display: flex;
             justify-content: space-between;
             letter-spacing: 0.8px;
@@ -187,7 +187,7 @@
             display: flex;
             align-items: center;
             padding: 14px 20px;
-            border-bottom: 1px solid var(--hltv-border);
+            border-bottom: 1px solid var(--egl-border);
             transition: all 0.15s ease;
             cursor: pointer;
         }
@@ -197,27 +197,26 @@
         }
 
         .ranked-team-row:hover {
-            background-color: var(--hltv-row-hover);
+            background-color: var(--egl-row-hover);
         }
 
         .team-position {
             font-size: 18px;
             font-weight: 700;
-            color: var(--hltv-text-dark);
+            color: var(--egl-text-dark);
             width: 45px;
             text-align: center;
         }
 
         .team-change {
             font-size: 13px;
-            color: var(--hltv-text-grey);
+            color: var(--egl-text-grey);
             width: 35px;
             text-align: center;
             font-weight: 600;
             margin-right: 10px;
         }
 
-        /* ИСПРАВЛЕННЫЙ КОНТЕЙНЕР ДЛЯ ЧЕРНОГО ЛОГОТИПА */
         .team-logo-container {
             width: 50px;
             height: 50px;
@@ -225,7 +224,7 @@
             align-items: center;
             justify-content: center;
             background-color: #0d0f12;
-            border: 1px solid var(--hltv-border);
+            border: 1px solid var(--egl-border);
             border-radius: 6px;
             margin-right: 18px;
             overflow: hidden;
@@ -254,13 +253,13 @@
         .team-name {
             font-size: 16px;
             font-weight: 700;
-            color: var(--hltv-accent-blue);
+            color: var(--egl-accent-blue);
             text-decoration: none;
             letter-spacing: 0.2px;
         }
 
         .ranked-team-row:hover .team-name {
-            color: var(--hltv-accent-orange);
+            color: var(--egl-accent-orange);
             text-decoration: underline;
         }
 
@@ -269,7 +268,7 @@
             flex-wrap: wrap;
             gap: 6px;
             font-size: 12px;
-            color: var(--hltv-text-grey);
+            color: var(--egl-text-grey);
         }
 
         .player-tag {
@@ -306,7 +305,7 @@
         .stat-row-label {
             font-size: 10px;
             font-weight: 700;
-            color: var(--hltv-text-grey);
+            color: var(--egl-text-grey);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -314,12 +313,12 @@
         .stat-row-value {
             font-size: 13px;
             font-weight: 700;
-            color: var(--hltv-text-dark);
+            color: var(--egl-text-dark);
             margin-bottom: 5px;
         }
 
         .stat-row-value.points-count {
-            color: var(--hltv-accent-blue);
+            color: var(--egl-accent-blue);
             background-color: #eef2f8;
             padding: 1px 6px;
             border-radius: 3px;
@@ -336,6 +335,224 @@
             text-transform: uppercase;
         }
 
+        /* ========================================================
+           ПРОФЕССИОНАЛЬНЫЕ СТИЛИ ПРОФИЛЯ КОМАНДЫ (EGL PREMIUM)
+           ======================================================== */
+        
+        .back-link-container {
+            margin-bottom: 16px;
+        }
+
+        .egl-back-btn {
+            background: none;
+            border: none;
+            color: var(--egl-accent-blue);
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .egl-back-btn:hover {
+            color: var(--egl-accent-orange);
+            text-decoration: underline;
+        }
+
+        /* Премиальная Шапка Команды в стиле EGL */
+        .egl-team-header {
+            background-color: var(--egl-subnav-bg);
+            border-radius: 4px 4px 0 0;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            color: #ffffff;
+            border-bottom: 3px solid var(--egl-accent-orange);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        .egl-team-header-logo {
+            width: 90px;
+            height: 90px;
+            background-color: #0d0f12;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            flex-shrink: 0;
+        }
+
+        .egl-team-header-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .egl-team-header-info {
+            flex-grow: 1;
+        }
+
+        .egl-team-header-title {
+            font-size: 28px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .egl-team-header-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 12px;
+            color: #9aa4af;
+        }
+
+        .egl-meta-pill {
+            background-color: rgba(255, 255, 255, 0.07);
+            padding: 4px 10px;
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+        }
+
+        .egl-meta-pill span {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* Двухколоночный макет EGL */
+        .egl-profile-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .egl-card {
+            background-color: var(--egl-box-bg);
+            border: 1px solid var(--egl-border);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+        }
+
+        .egl-card-title {
+            background-color: var(--egl-box-header);
+            padding: 12px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--egl-text-grey);
+            border-bottom: 1px solid var(--egl-border);
+            letter-spacing: 0.8px;
+        }
+
+        /* Сетка Ростера (Карточки игроков как на EGL) */
+        .egl-roster-flex {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            padding: 16px;
+        }
+
+        .egl-player-card {
+            background-color: #f8fafc;
+            border: 1px solid var(--egl-border);
+            border-radius: 4px;
+            padding: 12px 6px;
+            text-align: center;
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .egl-player-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--egl-accent-orange);
+            background-color: #ffffff;
+        }
+
+        .egl-player-avatar {
+            width: 100%;
+            height: 64px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #94a3b8;
+        }
+
+        .egl-player-nick {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--egl-text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .egl-player-sub {
+            font-size: 10px;
+            color: var(--egl-text-grey);
+            text-transform: uppercase;
+            margin-top: 2px;
+            font-weight: 600;
+        }
+
+        /* Кастомный пустой лог в стиле EGL */
+        .egl-empty-table-state {
+            padding: 34px;
+            text-align: center;
+            color: var(--egl-text-grey);
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .egl-empty-table-state-icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 8px;
+            opacity: 0.6;
+        }
+
+        /* Боковое меню статистики */
+        .egl-stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f3f7;
+            font-size: 13px;
+        }
+
+        .egl-stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .egl-stat-label {
+            color: var(--egl-text-grey);
+            font-weight: 600;
+        }
+
+        .egl-stat-value {
+            font-weight: 700;
+            color: var(--egl-text-dark);
+        }
+
+        .egl-stat-value.highlight {
+            color: var(--egl-accent-blue);
+        }
+
+        /* Всплывашка уведомлений */
         .dev-toast {
             position: fixed;
             bottom: -100px;
@@ -346,7 +563,7 @@
             padding: 14px 28px;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-left: 4px solid var(--hltv-accent-orange);
+            border-left: 4px solid var(--egl-accent-orange);
             font-weight: 600;
             z-index: 1000;
             transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
@@ -364,12 +581,23 @@
         }
 
         .dev-toast .icon {
-            color: var(--hltv-accent-orange);
+            color: var(--egl-accent-orange);
             font-size: 18px;
         }
 
+        /* Адаптивность для мобилок */
+        @media (max-width: 768px) {
+            .egl-profile-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .egl-roster-flex {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
         @media (max-width: 650px) {
-            .hltv-navbar { padding: 0 12px; }
+            .egl-navbar { padding: 0 12px; }
             .navbar-brand { font-size: 18px; }
             .navbar-links a { font-size: 11px; padding: 0 8px; }
             .ranked-team-row { padding: 12px 10px; }
@@ -379,18 +607,23 @@
             .team-name { font-size: 14px; }
             .team-players { display: none; }
             .team-stats-cell { min-width: 90px; }
+            
+            .egl-team-header { padding: 16px; gap: 16px; }
+            .egl-team-header-logo { width: 64px; height: 64px; padding: 4px; }
+            .egl-team-header-title { font-size: 20px; margin-bottom: 4px; }
+            .egl-roster-flex { grid-template-columns: repeat(2, 1fr); padding: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="hltv-navbar">
-        <div class="navbar-brand" onclick="showDevAlert()">EGL <span>League</span></div>
+    <div class="egl-navbar">
+        <div class="navbar-brand" onclick="closeTeamProfile()">EGL <span>League</span></div>
         <div class="navbar-links">
-            <a href="#" class="active" onclick="event.preventDefault();">Рейтинг</a>
+            <a href="#" class="active" id="navRatingLink" onclick="closeTeamProfile(); event.preventDefault();">Рейтинг</a>
             <a href="#" onclick="showDevAlert(event)">Матчи</a>
             <a href="#" onclick="showDevAlert(event)">Турниры</a>
-            <a href="#" onclick="showDevAlert(event)">Команды</a>
+            <a href="#" onclick="closeTeamProfile(); event.preventDefault();">Команды</a> 
         </div>
     </div>
 
@@ -398,8 +631,7 @@
         <div>Регион: СНГ / Мир</div>
         <div class="update-time">Обновлено сегодня</div>
     </div>
-
-    <div class="main-container">
+<div id="rankingView" class="main-container">
         <h2 class="ranking-header">Командный рейтинг EGL</h2>
         
         <div class="ranking-box">
@@ -408,8 +640,7 @@
                 <div>Статистика</div>
             </div>
 
-            <!-- #1 RAGE TEAM -->
-            <div class="ranked-team-row" onclick="showDevAlert()">
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
                 <div class="team-position">#1</div>
                 <div class="team-change">-</div>
                 
@@ -441,9 +672,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- #2 TEAM MIDLESS -->
-            <div class="ranked-team-row" onclick="showDevAlert()">
+ <div class="ranked-team-row" onclick="openTeamProfile(this)">
                 <div class="team-position">#2</div>
                 <div class="team-change">-</div>
                 
@@ -476,8 +705,7 @@
                 </div>
             </div>
 
-            <!-- #3 Tauroda -->
-            <div class="ranked-team-row" onclick="showDevAlert()">
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
                 <div class="team-position">#3</div>
                 <div class="team-change">-</div>
                 
@@ -485,7 +713,7 @@
                     <img src="https://i.postimg.cc/65GXdzfq/Tauroda.jpg" alt="Tauroda">
                 </div>
 
-<div class="team-main-info">
+                <div class="team-main-info">
                     <div class="team-identity">
                         <span class="team-name">Tauroda</span>
                     </div>
@@ -512,10 +740,81 @@
 
         </div>
     </div>
+  <div id="profileView" class="main-container" style="display: none;">
+        
+        <div class="back-link-container">
+            <button class="egl-back-btn" onclick="closeTeamProfile()">← Назад к списку рейтинга</button>
+        </div>
+
+        <div class="egl-team-header">
+            <div class="egl-team-header-logo">
+                <img id="profLogo" src="" alt="Логотип">
+            </div>
+            <div class="egl-team-header-info">
+                <h1 id="profName" class="egl-team-header-title">Название</h1>
+                <div class="egl-team-header-meta">
+                    <div class="egl-meta-pill">Положение в лиге: <span id="profPos">#0</span></div>
+                    <div class="egl-meta-pill">Лига: <span id="profTier">Tier 3</span></div>
+                    <div class="egl-meta-pill">Текущие очки: <span id="profPoints">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="egl-profile-grid">
+            
+            <div class="egl-main-column">
+                
+                <div class="egl-card">
+                    <div class="egl-card-title">Текущий состав команды</div>
+                    <div class="egl-roster-flex" id="profRoster">
+                        </div>
+                </div>
+
+                <div class="egl-card">
+                    <div class="egl-card-title">История матчей команды</div>
+                    <div class="egl-empty-table-state">
+                        <span class="egl-empty-table-state-icon">📅</span>
+                        Официальных матчей на лиге еще не сыграно
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="egl-sidebar-column">
+                
+                <div class="egl-card">
+                    <div class="egl-card-title">Статистика состава</div>
+                    
+                    <div class="egl-stat-row">
+                        <span class="egl-stat-label">Винрейт матчей</span>
+                        <span class="egl-stat-value">0%</span>
+                    </div>
+                    <div class="egl-stat-row">
+                        <span class="egl-stat-label">Всего игр</span>
+                        <span class="egl-stat-value highlight">0</span>
+                    </div>
+                    <div class="egl-stat-row">
+                        <span class="egl-stat-label">Победы / Поражения</span>
+                        <span class="egl-stat-value">0 / 0</span>
+                    </div>
+                    <div class="egl-stat-row">
+                        <span class="egl-stat-label">Средний K/D команды</span>
+                        <span class="egl-stat-value">-</span>
+                    </div>
+                    <div class="egl-stat-row">
+                        <span class="egl-stat-label">Любимая карта</span>
+                        <span class="egl-stat-value">Нет данных</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 
     <div id="devToast" class="dev-toast">
         <span class="icon">⚠️</span>
-        <span>Раздел находится в разработке. Пока доступен только командный рейтинг.</span>
+        <span>Раздел находится в разработке.</span>
     </div>
 
     <script>
@@ -528,6 +827,60 @@
             toastTimeout = setTimeout(() => {
                 toast.classList.remove('show');
             }, 3500);
+        }
+
+        // Логика перехода в чистый отдельный профиль команды
+        function openTeamProfile(rowElement) {
+            try {
+                // Извлекаем данные напрямую из разметки
+                const pos = rowElement.querySelector('.team-position').innerText;
+                const logoSrc = rowElement.querySelector('img').src;
+                const teamName = rowElement.querySelector('.team-name').innerText;
+                const tier = rowElement.querySelector('.tier-badge').innerText;
+                const points = rowElement.querySelector('.points-count').innerText;
+                
+                // Извлекаем ники игроков
+                const playerTags = rowElement.querySelectorAll('.player-tag');
+                const rosterContainer = document.getElementById('profRoster');
+                rosterContainer.innerHTML = ''; // Чистим ростер перед заполнением
+                
+                playerTags.forEach(tag => {
+                    const playerName = tag.innerText.replace('👤', '').trim();
+                    
+                    // Создаем красивую EGL-карточку для каждого игрока
+                    const playerCard = document.createElement('div');
+                    playerCard.className = 'egl-player-card';
+                    playerCard.innerHTML = `
+                        <div class="egl-player-avatar">👤</div>
+                        <div class="egl-player-nick">${playerName}</div>
+                        <div class="egl-player-sub">Игрок</div>
+                    `;
+                    rosterContainer.appendChild(playerCard);
+                });
+
+                // Подставляем данные в профиль
+                document.getElementById('profPos').innerText = pos;
+                document.getElementById('profLogo').src = logoSrc;
+                document.getElementById('profName').innerText = teamName;
+                document.getElementById('profTier').innerText = tier;
+                document.getElementById('profPoints').innerText = points;
+
+                // Полностью переключаем экраны
+                document.getElementById('rankingView').style.display = 'none';
+                document.getElementById('profileView').style.display = 'block';
+                
+                // Перематываем страницу вверх для бесшовного перехода
+                window.scrollTo(0, 0); 
+            } catch (e) {
+                console.error("Ошибка при генерации профиля: ", e);
+            }
+        }
+
+        // Логика полного возврата на страницу рейтинга
+        function closeTeamProfile() {
+            document.getElementById('profileView').style.display = 'none';
+            document.getElementById('rankingView').style.display = 'block';
+            window.scrollTo(0, 0);
         }
     </script>
 
