@@ -20,6 +20,73 @@
             --toast-bg: #1e293b;
         }
 
+        /* Настройки темной темы */
+        body.dark-theme {
+            --egl-bg: #0b0f17;
+            --egl-nav-bg: #111823;
+            --egl-subnav-bg: #1a2332;
+            --egl-box-bg: #161f2b;
+            --egl-box-header: #212c3d;
+            --egl-border: #2b3a4e;
+            --egl-text-dark: #f4f5f7;
+            --egl-text-grey: #9aa4af;
+            --egl-accent-blue: #5c7fb8;
+            --egl-row-hover: #1e293b;
+            --toast-bg: #0f172a;
+        }
+
+        body.dark-theme .player-tag {
+            background-color: #212c3d;
+            border-color: #2b3a4e;
+            color: #9aa4af;
+        }
+
+        body.dark-theme .player-tag:hover {
+            background-color: var(--egl-accent-blue);
+            color: #ffffff;
+        }
+
+        body.dark-theme .egl-player-card {
+            background-color: #1a2332;
+            border-color: #2b3a4e;
+        }
+
+        body.dark-theme .egl-player-avatar {
+            background-color: #212c3d;
+            color: #626d7c;
+        }
+
+        body.dark-theme .egl-tournament-header {
+            background-color: #1a2332;
+        }
+
+        body.dark-theme .egl-match-row {
+            border-bottom-color: #2b3a4e;
+        }
+
+        body.dark-theme .match-time-cell {
+            border-right-color: #2b3a4e;
+        }
+
+        body.dark-theme .match-format-badge {
+            background-color: #212c3d;
+            border-color: #2b3a4e;
+        }
+
+        body.dark-theme .match-header-center-col {
+            background-color: #161f2b;
+        }
+
+        body.dark-theme .stat-row-value.points-count {
+            background-color: #1a2332;
+            border-color: #2b3a4e;
+            color: var(--egl-accent-blue);
+        }
+        
+        body.dark-theme .match-analytics-btn {
+            background-color: #161f2b;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -33,6 +100,7 @@
             font-size: 14px;
             padding-bottom: 60px;
             overflow-x: hidden;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
         /* Верхняя навигационная панель */
@@ -748,6 +816,10 @@
             </div>
         </div>
         <div class="drawer-item" onclick="navigateFromDrawer('schedule')">Расписание</div>
+        
+        <!-- Кнопка смены темы -->
+        <div style="border-top: 1px solid var(--egl-border); margin: 15px 24px; opacity: 0.15;"></div>
+        <div class="drawer-item" id="themeToggleBtn" onclick="toggleTheme()" style="color: var(--egl-accent-orange);">Тема: Светлая</div>
     </div>
 
     <div class="sub-navbar">
@@ -811,29 +883,6 @@
                 <div class="team-position">#3</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
-                    <img src="https://i.postimg.cc/j2NzG4gS/1.jpg" alt="Skeleton International Gaming">
-                </div>
-                <div class="team-main-info">
-                    <div class="team-identity"><span class="team-name">Skeleton International Gaming</span></div>
-                    <div class="team-players">
-                        <div class="player-tag" data-role="капитан" onclick="goToPlayerStats(event)">devil</div>
-                        <div class="player-tag" onclick="goToPlayerStats(event)">hu_tao</div>
-                        <div class="player-tag" onclick="goToPlayerStats(event)">avav</div>
-                        <div class="player-tag" onclick="goToPlayerStats(event)">nevechniyss</div>
-                        <div class="player-tag" onclick="goToPlayerStats(event)">Zipresk</div>
-                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">rv93</div>
-                    </div>
-                </div>
-                <div class="team-stats-cell">
-                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
-                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
-                </div>
-            </div>
-
-            <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#4</div>
-                <div class="team-change">-</div>
-                <div class="team-logo-container">
                     <img src="https://i.postimg.cc/DzLqQvVh/4j1pxjc92wxg-Q3-c-Rs-I0EL3m-XWc-TXGvfq0Lf-BFz3h-PIm-Xylz-Nx4b-PElsk-Fdv-AUWs-Mb-Oc-GS9w-4RFEGr9j1ADC.jpg" alt="Magic spirit">
                 </div>
                 <div class="team-main-info">
@@ -841,7 +890,6 @@
                     <div class="team-players">
                         <div class="player-tag" onclick="goToPlayerStats(event)">johan99</div>
                         <div class="player-tag" onclick="goToPlayerStats(event)">BuMIXs</div>
-                        <div class="player-tag" onclick="goToPlayerStats(event)">mg</div>
                         <div class="player-tag" onclick="goToPlayerStats(event)">h_r4o</div>
                         <div class="player-tag" onclick="goToPlayerStats(event)">entyakovskii2</div>
                         <div class="player-tag" onclick="goToPlayerStats(event)">Fl1kxz</div>
@@ -854,7 +902,7 @@
             </div>
 
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#5</div>
+                <div class="team-position">#4</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/3R909WnV/IMG-1659.jpg" alt="NEXORA TEAM">
@@ -876,7 +924,7 @@
             </div>
 
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#6</div>
+                <div class="team-position">#5</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/25G5NMhB/B9U9UZ0Qf-Q34KPj6bt-KVPgb-Ew-K457r-Qg3Zo-Neilb-LSO9n8QWv-Dhc-MLy-AUM9ih-ML-pb-TKe-AFil-J3d-AGjn3Hn-p.webp" alt="Neon Void">
@@ -898,7 +946,7 @@
             </div>
 
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#7</div>
+                <div class="team-position">#6</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/2SFknMHX/gg-team.jpg" alt="GG TEAM">
@@ -920,7 +968,7 @@
             </div>
 
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#8</div>
+                <div class="team-position">#7</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/P53YYdtS/IMG-5639.jpg" alt="Imperium eSports">
@@ -942,7 +990,7 @@
             </div>
 
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#9</div>
+                <div class="team-position">#8</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/Jz2HtKxL/35gradus.png" alt="35GRADUS">
@@ -964,7 +1012,7 @@
             </div>
 
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#10</div>
+                <div class="team-position">#9</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/66f7CBcv/210c2aac-7a34-4e4e-a4da-ebf3eecba33e.jpg" alt="Revenant Team">
@@ -989,7 +1037,7 @@
             </div>
 
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#11</div>
+                <div class="team-position">#10</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/85BCdbRJ/IMG-1540.jpg" alt="Cynced Team">
@@ -1012,7 +1060,7 @@
             </div>
 
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#12</div>
+                <div class="team-position">#11</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/Cx3MW2Jk/IMG-3942.jpg" alt="1LOSE Esport">
@@ -1035,7 +1083,7 @@
             </div>
 
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#13</div>
+                <div class="team-position">#12</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/Hnvd3vVV/Georgian-ZZ.png" alt="GeorgianZ">
@@ -1058,7 +1106,7 @@
 
             <!-- Lotus Team -->
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#14</div>
+                <div class="team-position">#13</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/Gt4m010v/image.png" alt="Lotus Team">
@@ -1087,7 +1135,7 @@
 
             <!-- 300TON -->
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#15</div>
+                <div class="team-position">#14</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/CdyYWBHC/logo.png" alt="300TON">
@@ -1111,7 +1159,7 @@
 
             <!-- Streelxx -->
             <div class="ranked-team-row" onclick="openTeamProfile(this)">
-                <div class="team-position">#16</div>
+                <div class="team-position">#15</div>
                 <div class="team-change">-</div>
                 <div class="team-logo-container">
                     <img src="https://i.postimg.cc/Z5SvNCt1/FEDFE0D0-5C77-44D0-A625-EDE35EE4C211.png" alt="Streelxx">
@@ -1126,6 +1174,534 @@
                         <div class="player-tag" onclick="goToPlayerStats(event)">n0rtexz</div>
                         <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">Lin0s</div>
                         <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">s1cher</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 1. DragonsEsports -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#16</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/hGLbn2ZX/56114-09999999963-1165.jpg" alt="DragonsEsports">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">DragonsEsports</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Shed0</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">V2doO</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">W1stel</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">NoCap</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">metsvvv</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">Donkz</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">D1selook</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 2. 011.Team -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#17</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/mkC9swSk/5F425B0E-0F12-4C82-BAF6-6503E5C3F6CD.png" alt="011.Team">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">011.Team</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">syynaxzz</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">mailight25</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">umtvs</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">rend1wskyy</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">tipo2</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 3. zmp kids -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#18</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/htSdkVQ4/2zmp.jpg" alt="zmp kids">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">zmp kids</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">needyx</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">lunv8</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">oneeside</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">alohadance</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">quwawe</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">spectrix</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">maloyyy</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">dimasek</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 4. Rayzex Team -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#19</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg" alt="Rayzex Team">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Rayzex Team</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">w1z</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">necxyl</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Noisy</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">v1zzi</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">kiro</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">Palt0sss</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 5. AURIX TEAM -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#20</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/8cZSj8wD/Chat-GPT-Image-30-2026-14-39-49.png" alt="AURIX TEAM">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">AURIX TEAM</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Dusti</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">m0nder</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Tr3fic</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Tif</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">pruf1k</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">DekOy</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 6. Prus team -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#21</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/mgFvGFxB/file-000000008614722fb3b9eef091233173.png" alt="Prus team">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Prus team</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">ddsnik</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">LOW_explur</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">ciza0</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">anW1xss</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">PAFASTIKY</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">kirshtain</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 7. Fox -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#22</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/jj4ksHMS/IMG-20260604-190020-013.jpg" alt="Fox">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Fox</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">makayon</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">deakanan</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">r1ch67</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">d4rk</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">hantaro</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 8. Washkow -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#23</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png" alt="Washkow">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Washkow</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">sky</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">jizness</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Ignat</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">depressed</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Васька санстрайк</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">Гинтоки</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">через харизму</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">Kuri Kogi</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">n0pse</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 9. Soulskream -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#24</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/3x7czfZL/Chat-GPT-Image-10-2026-10-10-48.png" alt="Soulskream">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Soulskream</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">WaBanKe</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Sheiriks</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">222222222S</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Dexlyy</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Adamant</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 10. Magical team -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#25</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/XYz99pXN/IMG-4177.png" alt="Magical team">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Magical team</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">ziyaad</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">desolay</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">kikomedia1</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">denchik</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">dosh3912</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 11. k67 -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#26</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/jSL7qtvD/file-000000003684720bade8283cda4a9f2e.png" alt="k67">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">k67</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">b3ks</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">000</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">ExTaZzZ</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Foodest</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">M4den09</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">KZ.gambit_work</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 12. Vince Community -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#27</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/ydPdXbnS/Vince-Community-Logo.png" alt="Vince Community">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Vince Community</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">dacey</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">blizz</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">frolojojo</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">faqoriz</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">rEsh-</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">zomlae</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 13. Rayzex Team (Второй состав/запись) -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#28</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg" alt="Rayzex Team">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Rayzex Team</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">w1z</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Noisy</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">necxyL</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Holland</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">k1ro</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 14. Team Raptors -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#29</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/bJ3y22N5/IMG-1281.jpg" alt="Team Raptors">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Team Raptors</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">ustupidorogu</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">zerotoler</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">exxiL1s</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">ShkrAbs</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Шk1per</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">Blackhole</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 15. 31B -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#30</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/26KpDd5R/file-00000000eb3c720c9c91b16d0b7621ac.png" alt="31B">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">31B</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">vlad_que</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">garf1ld</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">rawenigma</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">krutoi8396</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">winglordfsl</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 16. violence team -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#31</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/DZH2g3LL/image.png" alt="violence team">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">violence team</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">youka666</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">y0shi999</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">ke1zy</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">kissed</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">gho1t</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">penay</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 17. Undercover agents -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#32</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/vZbGXzgj/editing-result-e89e86c4647811f1a7e1b2cfdd2a167c-1.jpg" alt="Undercover agents">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Undercover agents</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">flomsade</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">L1cha</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">saysay</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">seraparambo</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">veno</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">dem0n</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 18. MOLDGAME -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#33</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/s28dF9xg/photo-2026-06-10-14-03-43.jpg" alt="MOLDGAME">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">MOLDGAME</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">TOXAtriceps</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">PetrosNYAN</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">RAIN</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">wertoq</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">hammam</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">rubin</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 19. Glampers Team -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#34</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/HLtcBnkc/7fcabb8f-7078-40e4-aff2-b0ffa92ba5ed.jpg" alt="Glampers Team">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Glampers Team</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">mentos</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Kroqud</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">qamryna</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Reverie</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Yunittttyy</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 20. stsw here -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#35</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/fTXxYwmc/IMG-1443.png" alt="stsw here">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">stsw here</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">snowy</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">N0xler</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">k0smos</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">wylans</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">sehhh</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">kokos</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 21. 9CIRCLE -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#36</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/x15NPqCd/photo-2026-06-10-19-56-38-(2).jpg" alt="9CIRCLE">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">9CIRCLE</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">AsmodeuZ</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Loricks</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">Kindlaa</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">kaWaNduRo</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">fak3r</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">Lacer</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">ank0</div>
+                    </div>
+                </div>
+                <div class="team-stats-cell">
+                    <div class="stat-row-block"><span class="stat-row-label">Тир лига</span><span class="stat-row-value tier-badge">Tier 3</span></div>
+                    <div class="stat-row-block"><span class="stat-row-label">Очки</span><span class="stat-row-value points-count">0</span></div>
+                </div>
+            </div>
+
+            <!-- 22. Nova Impera -->
+            <div class="ranked-team-row" onclick="openTeamProfile(this)">
+                <div class="team-position">#37</div>
+                <div class="team-change">-</div>
+                <div class="team-logo-container">
+                    <img src="https://i.postimg.cc/L5jng8w5/Chat-GPT-Image-10-2026-02-27-08.png" alt="Nova Impera">
+                </div>
+                <div class="team-main-info">
+                    <div class="team-identity"><span class="team-name">Nova Impera</span></div>
+                    <div class="team-players">
+                        <div class="player-tag" onclick="goToPlayerStats(event)">xdeivekx</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">m4tr1x</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">marcelo</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">enotick</div>
+                        <div class="player-tag" onclick="goToPlayerStats(event)">droneks</div>
+                        <div class="player-tag" data-role="замена" onclick="goToPlayerStats(event)">evanorda</div>
                     </div>
                 </div>
                 <div class="team-stats-cell">
@@ -1276,18 +1852,9 @@
             { name: "W3rty", team: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
             { name: "Tofy", team: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
             
-            /* Игроки Skeleton International Gaming */
-            { name: "devil", team: "Skeleton International Gaming", logo: "https://i.postimg.cc/j2NzG4gS/1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
-            { name: "hu_tao", team: "Skeleton International Gaming", logo: "https://i.postimg.cc/j2NzG4gS/1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
-            { name: "avav", team: "Skeleton International Gaming", logo: "https://i.postimg.cc/j2NzG4gS/1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
-            { name: "nevechniyss", team: "Skeleton International Gaming", logo: "https://i.postimg.cc/j2NzG4gS/1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
-            { name: "Zipresk", team: "Skeleton International Gaming", logo: "https://i.postimg.cc/j2NzG4gS/1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
-            { name: "rv93", team: "Skeleton International Gaming", logo: "https://i.postimg.cc/j2NzG4gS/1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
-            
-            /* Игроки Magic spirit */
+            /* Игроки Magic spirit (Игрок mg удален) */
             { name: "johan99", team: "Magic spirit", logo: "https://i.postimg.cc/DzLqQvVh/4j1pxjc92wxg-Q3-c-Rs-I0EL3m-XWc-TXGvfq0Lf-BFz3h-PIm-Xylz-Nx4b-PElsk-Fdv-AUWs-Mb-Oc-GS9w-4RFEGr9j1ADC.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
             { name: "BuMIXs", team: "Magic spirit", logo: "https://i.postimg.cc/DzLqQvVh/4j1pxjc92wxg-Q3-c-Rs-I0EL3m-XWc-TXGvfq0Lf-BFz3h-PIm-Xylz-Nx4b-PElsk-Fdv-AUWs-Mb-Oc-GS9w-4RFEGr9j1ADC.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
-            { name: "mg", team: "Magic spirit", logo: "https://i.postimg.cc/DzLqQvVh/4j1pxjc92wxg-Q3-c-Rs-I0EL3m-XWc-TXGvfq0Lf-BFz3h-PIm-Xylz-Nx4b-PElsk-Fdv-AUWs-Mb-Oc-GS9w-4RFEGr9j1ADC.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
             { name: "h_r4o", team: "Magic spirit", logo: "https://i.postimg.cc/DzLqQvVh/4j1pxjc92wxg-Q3-c-Rs-I0EL3m-XWc-TXGvfq0Lf-BFz3h-PIm-Xylz-Nx4b-PElsk-Fdv-AUWs-Mb-Oc-GS9w-4RFEGr9j1ADC.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
             { name: "entyakovskii2", team: "Magic spirit", logo: "https://i.postimg.cc/DzLqQvVh/4j1pxjc92wxg-Q3-c-Rs-I0EL3m-XWc-TXGvfq0Lf-BFz3h-PIm-Xylz-Nx4b-PElsk-Fdv-AUWs-Mb-Oc-GS9w-4RFEGr9j1ADC.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
             { name: "Fl1kxz", team: "Magic spirit", logo: "https://i.postimg.cc/DzLqQvVh/4j1pxjc92wxg-Q3-c-Rs-I0EL3m-XWc-TXGvfq0Lf-BFz3h-PIm-Xylz-Nx4b-PElsk-Fdv-AUWs-Mb-Oc-GS9w-4RFEGr9j1ADC.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
@@ -1388,13 +1955,188 @@
             { name: "Leanxx", team: "Streelxx", logo: "https://i.postimg.cc/Z5SvNCt1/FEDFE0D0-5C77-44D0-A625-EDE35EE4C211.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
             { name: "n0rtexz", team: "Streelxx", logo: "https://i.postimg.cc/Z5SvNCt1/FEDFE0D0-5C77-44D0-A625-EDE35EE4C211.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
             { name: "Lin0s", team: "Streelxx", logo: "https://i.postimg.cc/Z5SvNCt1/FEDFE0D0-5C77-44D0-A625-EDE35EE4C211.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
-            { name: "s1cher", team: "Streelxx", logo: "https://i.postimg.cc/Z5SvNCt1/FEDFE0D0-5C77-44D0-A625-EDE35EE4C211.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" }
+            { name: "s1cher", team: "Streelxx", logo: "https://i.postimg.cc/Z5SvNCt1/FEDFE0D0-5C77-44D0-A625-EDE35EE4C211.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 1. DragonsEsports */
+            { name: "Shed0", team: "DragonsEsports", logo: "https://i.postimg.cc/hGLbn2ZX/56114-09999999963-1165.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "V2doO", team: "DragonsEsports", logo: "https://i.postimg.cc/hGLbn2ZX/56114-09999999963-1165.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "W1stel", team: "DragonsEsports", logo: "https://i.postimg.cc/hGLbn2ZX/56114-09999999963-1165.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "NoCap", team: "DragonsEsports", logo: "https://i.postimg.cc/hGLbn2ZX/56114-09999999963-1165.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "metsvvv", team: "DragonsEsports", logo: "https://i.postimg.cc/hGLbn2ZX/56114-09999999963-1165.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Donkz", team: "DragonsEsports", logo: "https://i.postimg.cc/hGLbn2ZX/56114-09999999963-1165.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "D1selook", team: "DragonsEsports", logo: "https://i.postimg.cc/hGLbn2ZX/56114-09999999963-1165.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 2. 011.Team */
+            { name: "syynaxzz", team: "011.Team", logo: "https://i.postimg.cc/mkC9swSk/5F425B0E-0F12-4C82-BAF6-6503E5C3F6CD.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "mailight25", team: "011.Team", logo: "https://i.postimg.cc/mkC9swSk/5F425B0E-0F12-4C82-BAF6-6503E5C3F6CD.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "umtvs", team: "011.Team", logo: "https://i.postimg.cc/mkC9swSk/5F425B0E-0F12-4C82-BAF6-6503E5C3F6CD.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "rend1wskyy", team: "011.Team", logo: "https://i.postimg.cc/mkC9swSk/5F425B0E-0F12-4C82-BAF6-6503E5C3F6CD.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "tipo2", team: "011.Team", logo: "https://i.postimg.cc/mkC9swSk/5F425B0E-0F12-4C82-BAF6-6503E5C3F6CD.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 3. zmp kids */
+            { name: "needyx", team: "zmp kids", logo: "https://i.postimg.cc/htSdkVQ4/2zmp.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "lunv8", team: "zmp kids", logo: "https://i.postimg.cc/htSdkVQ4/2zmp.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "oneeside", team: "zmp kids", logo: "https://i.postimg.cc/htSdkVQ4/2zmp.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "alohadance", team: "zmp kids", logo: "https://i.postimg.cc/htSdkVQ4/2zmp.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "quwawe", team: "zmp kids", logo: "https://i.postimg.cc/htSdkVQ4/2zmp.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "spectrix", team: "zmp kids", logo: "https://i.postimg.cc/htSdkVQ4/2zmp.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "maloyyy", team: "zmp kids", logo: "https://i.postimg.cc/htSdkVQ4/2zmp.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "dimasek", team: "zmp kids", logo: "https://i.postimg.cc/htSdkVQ4/2zmp.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 4. Rayzex Team */
+            { name: "w1z", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "necxyl", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Noisy", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "v1zzi", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "kiro", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Palt0sss", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 5. AURIX TEAM */
+            { name: "Dusti", team: "AURIX TEAM", logo: "https://i.postimg.cc/8cZSj8wD/Chat-GPT-Image-30-2026-14-39-49.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "m0nder", team: "AURIX TEAM", logo: "https://i.postimg.cc/8cZSj8wD/Chat-GPT-Image-30-2026-14-39-49.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Tr3fic", team: "AURIX TEAM", logo: "https://i.postimg.cc/8cZSj8wD/Chat-GPT-Image-30-2026-14-39-49.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Tif", team: "AURIX TEAM", logo: "https://i.postimg.cc/8cZSj8wD/Chat-GPT-Image-30-2026-14-39-49.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "pruf1k", team: "AURIX TEAM", logo: "https://i.postimg.cc/8cZSj8wD/Chat-GPT-Image-30-2026-14-39-49.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "DekOy", team: "AURIX TEAM", logo: "https://i.postimg.cc/8cZSj8wD/Chat-GPT-Image-30-2026-14-39-49.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 6. Prus team */
+            { name: "ddsnik", team: "Prus team", logo: "https://i.postimg.cc/mgFvGFxB/file-000000008614722fb3b9eef091233173.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "LOW_explur", team: "Prus team", logo: "https://i.postimg.cc/mgFvGFxB/file-000000008614722fb3b9eef091233173.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "ciza0", team: "Prus team", logo: "https://i.postimg.cc/mgFvGFxB/file-000000008614722fb3b9eef091233173.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "anW1xss", team: "Prus team", logo: "https://i.postimg.cc/mgFvGFxB/file-000000008614722fb3b9eef091233173.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "PAFASTIKY", team: "Prus team", logo: "https://i.postimg.cc/mgFvGFxB/file-000000008614722fb3b9eef091233173.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "kirshtain", team: "Prus team", logo: "https://i.postimg.cc/mgFvGFxB/file-000000008614722fb3b9eef091233173.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 7. Fox */
+            { name: "makayon", team: "Fox", logo: "https://i.postimg.cc/jj4ksHMS/IMG-20260604-190020-013.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "deakanan", team: "Fox", logo: "https://i.postimg.cc/jj4ksHMS/IMG-20260604-190020-013.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "r1ch67", team: "Fox", logo: "https://i.postimg.cc/jj4ksHMS/IMG-20260604-190020-013.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "d4rk", team: "Fox", logo: "https://i.postimg.cc/jj4ksHMS/IMG-20260604-190020-013.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "hantaro", team: "Fox", logo: "https://i.postimg.cc/jj4ksHMS/IMG-20260604-190020-013.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 8. Washkow */
+            { name: "sky", team: "Washkow", logo: "https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "jizness", team: "Washkow", logo: "https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Ignat", team: "Washkow", logo: "https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "depressed", team: "Washkow", logo: "https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Васька санстрайк", team: "Washkow", logo: "https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Гинтоки", team: "Washkow", logo: "https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "через харизму", team: "Washkow", logo: "https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Kuri Kogi", team: "Washkow", logo: "https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "n0pse", team: "Washkow", logo: "https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 9. Soulskream */
+            { name: "WaBanKe", team: "Soulskream", logo: "https://i.postimg.cc/3x7czfZL/Chat-GPT-Image-10-2026-10-10-48.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Sheiriks", team: "Soulskream", logo: "https://i.postimg.cc/3x7czfZL/Chat-GPT-Image-10-2026-10-10-48.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "222222222S", team: "Soulskream", logo: "https://i.postimg.cc/3x7czfZL/Chat-GPT-Image-10-2026-10-10-48.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Dexlyy", team: "Soulskream", logo: "https://i.postimg.cc/3x7czfZL/Chat-GPT-Image-10-2026-10-10-48.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Adamant", team: "Soulskream", logo: "https://i.postimg.cc/3x7czfZL/Chat-GPT-Image-10-2026-10-10-48.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 10. Magical team */
+            { name: "ziyaad", team: "Magical team", logo: "https://i.postimg.cc/XYz99pXN/IMG-4177.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "desolay", team: "Magical team", logo: "https://i.postimg.cc/XYz99pXN/IMG-4177.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "kikomedia1", team: "Magical team", logo: "https://i.postimg.cc/XYz99pXN/IMG-4177.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "denchik", team: "Magical team", logo: "https://i.postimg.cc/XYz99pXN/IMG-4177.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "dosh3912", team: "Magical team", logo: "https://i.postimg.cc/XYz99pXN/IMG-4177.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 11. k67 */
+            { name: "b3ks", team: "k67", logo: "https://i.postimg.cc/jSL7qtvD/file-000000003684720bade8283cda4a9f2e.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "000", team: "k67", logo: "https://i.postimg.cc/jSL7qtvD/file-000000003684720bade8283cda4a9f2e.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "ExTaZzZ", team: "k67", logo: "https://i.postimg.cc/jSL7qtvD/file-000000003684720bade8283cda4a9f2e.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Foodest", team: "k67", logo: "https://i.postimg.cc/jSL7qtvD/file-000000003684720bade8283cda4a9f2e.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "M4den09", team: "k67", logo: "https://i.postimg.cc/jSL7qtvD/file-000000003684720bade8283cda4a9f2e.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "KZ.gambit_work", team: "k67", logo: "https://i.postimg.cc/jSL7qtvD/file-000000003684720bade8283cda4a9f2e.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 12. Vince Community */
+            { name: "dacey", team: "Vince Community", logo: "https://i.postimg.cc/ydPdXbnS/Vince-Community-Logo.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "blizz", team: "Vince Community", logo: "https://i.postimg.cc/ydPdXbnS/Vince-Community-Logo.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "frolojojo", team: "Vince Community", logo: "https://i.postimg.cc/ydPdXbnS/Vince-Community-Logo.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "faqoriz", team: "Vince Community", logo: "https://i.postimg.cc/ydPdXbnS/Vince-Community-Logo.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "rEsh-", team: "Vince Community", logo: "https://i.postimg.cc/ydPdXbnS/Vince-Community-Logo.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "zomlae", team: "Vince Community", logo: "https://i.postimg.cc/ydPdXbnS/Vince-Community-Logo.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 13. Rayzex Team */
+            { name: "w1z", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Noisy", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "necxyL", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Holland", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "k1ro", team: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 14. Team Raptors */
+            { name: "ustupidorogu", team: "Team Raptors", logo: "https://i.postimg.cc/bJ3y22N5/IMG-1281.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "zerotoler", team: "Team Raptors", logo: "https://i.postimg.cc/bJ3y22N5/IMG-1281.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "exxiL1s", team: "Team Raptors", logo: "https://i.postimg.cc/bJ3y22N5/IMG-1281.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "ShkrAbs", team: "Team Raptors", logo: "https://i.postimg.cc/bJ3y22N5/IMG-1281.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Шk1per", team: "Team Raptors", logo: "https://i.postimg.cc/bJ3y22N5/IMG-1281.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Blackhole", team: "Team Raptors", logo: "https://i.postimg.cc/bJ3y22N5/IMG-1281.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 15. 31B */
+            { name: "vlad_que", team: "31B", logo: "https://i.postimg.cc/26KpDd5R/file-00000000eb3c720c9c91b16d0b7621ac.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "garf1ld", team: "31B", logo: "https://i.postimg.cc/26KpDd5R/file-00000000eb3c720c9c91b16d0b7621ac.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "rawenigma", team: "31B", logo: "https://i.postimg.cc/26KpDd5R/file-00000000eb3c720c9c91b16d0b7621ac.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "krutoi8396", team: "31B", logo: "https://i.postimg.cc/26KpDd5R/file-00000000eb3c720c9c91b16d0b7621ac.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "winglordfsl", team: "31B", logo: "https://i.postimg.cc/26KpDd5R/file-00000000eb3c720c9c91b16d0b7621ac.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 16. violence team */
+            { name: "youka666", team: "violence team", logo: "https://i.postimg.cc/DZH2g3LL/image.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "y0shi999", team: "violence team", logo: "https://i.postimg.cc/DZH2g3LL/image.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "ke1zy", team: "violence team", logo: "https://i.postimg.cc/DZH2g3LL/image.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "kissed", team: "violence team", logo: "https://i.postimg.cc/DZH2g3LL/image.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "gho1t", team: "violence team", logo: "https://i.postimg.cc/DZH2g3LL/image.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "penay", team: "violence team", logo: "https://i.postimg.cc/DZH2g3LL/image.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 17. Undercover agents */
+            { name: "flomsade", team: "Undercover agents", logo: "https://i.postimg.cc/vZbGXzgj/editing-result-e89e86c4647811f1a7e1b2cfdd2a167c-1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "L1cha", team: "Undercover agents", logo: "https://i.postimg.cc/vZbGXzgj/editing-result-e89e86c4647811f1a7e1b2cfdd2a167c-1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "saysay", team: "Undercover agents", logo: "https://i.postimg.cc/vZbGXzgj/editing-result-e89e86c4647811f1a7e1b2cfdd2a167c-1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "seraparambo", team: "Undercover agents", logo: "https://i.postimg.cc/vZbGXzgj/editing-result-e89e86c4647811f1a7e1b2cfdd2a167c-1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "veno", team: "Undercover agents", logo: "https://i.postimg.cc/vZbGXzgj/editing-result-e89e86c4647811f1a7e1b2cfdd2a167c-1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "dem0n", team: "Undercover agents", logo: "https://i.postimg.cc/vZbGXzgj/editing-result-e89e86c4647811f1a7e1b2cfdd2a167c-1.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 18. MOLDGAME */
+            { name: "TOXAtriceps", team: "MOLDGAME", logo: "https://i.postimg.cc/s28dF9xg/photo-2026-06-10-14-03-43.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "PetrosNYAN", team: "MOLDGAME", logo: "https://i.postimg.cc/s28dF9xg/photo-2026-06-10-14-03-43.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "RAIN", team: "MOLDGAME", logo: "https://i.postimg.cc/s28dF9xg/photo-2026-06-10-14-03-43.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "wertoq", team: "MOLDGAME", logo: "https://i.postimg.cc/s28dF9xg/photo-2026-06-10-14-03-43.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "hammam", team: "MOLDGAME", logo: "https://i.postimg.cc/s28dF9xg/photo-2026-06-10-14-03-43.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "rubin", team: "MOLDGAME", logo: "https://i.postimg.cc/s28dF9xg/photo-2026-06-10-14-03-43.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 19. Glampers Team */
+            { name: "mentos", team: "Glampers Team", logo: "https://i.postimg.cc/HLtcBnkc/7fcabb8f-7078-40e4-aff2-b0ffa92ba5ed.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Kroqud", team: "Glampers Team", logo: "https://i.postimg.cc/HLtcBnkc/7fcabb8f-7078-40e4-aff2-b0ffa92ba5ed.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "qamryna", team: "Glampers Team", logo: "https://i.postimg.cc/HLtcBnkc/7fcabb8f-7078-40e4-aff2-b0ffa92ba5ed.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Reverie", team: "Glampers Team", logo: "https://i.postimg.cc/HLtcBnkc/7fcabb8f-7078-40e4-aff2-b0ffa92ba5ed.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Yunittttyy", team: "Glampers Team", logo: "https://i.postimg.cc/HLtcBnkc/7fcabb8f-7078-40e4-aff2-b0ffa92ba5ed.jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 20. stsw here */
+            { name: "snowy", team: "stsw here", logo: "https://i.postimg.cc/fTXxYwmc/IMG-1443.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "N0xler", team: "stsw here", logo: "https://i.postimg.cc/fTXxYwmc/IMG-1443.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "k0smos", team: "stsw here", logo: "https://i.postimg.cc/fTXxYwmc/IMG-1443.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "wylans", team: "stsw here", logo: "https://i.postimg.cc/fTXxYwmc/IMG-1443.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "sehhh", team: "stsw here", logo: "https://i.postimg.cc/fTXxYwmc/IMG-1443.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "kokos", team: "stsw here", logo: "https://i.postimg.cc/fTXxYwmc/IMG-1443.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 21. 9CIRCLE */
+            { name: "AsmodeuZ", team: "9CIRCLE", logo: "https://i.postimg.cc/x15NPqCd/photo-2026-06-10-19-56-38-(2).jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Loricks", team: "9CIRCLE", logo: "https://i.postimg.cc/x15NPqCd/photo-2026-06-10-19-56-38-(2).jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Kindlaa", team: "9CIRCLE", logo: "https://i.postimg.cc/x15NPqCd/photo-2026-06-10-19-56-38-(2).jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "kaWaNduRo", team: "9CIRCLE", logo: "https://i.postimg.cc/x15NPqCd/photo-2026-06-10-19-56-38-(2).jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "fak3r", team: "9CIRCLE", logo: "https://i.postimg.cc/x15NPqCd/photo-2026-06-10-19-56-38-(2).jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "Lacer", team: "9CIRCLE", logo: "https://i.postimg.cc/x15NPqCd/photo-2026-06-10-19-56-38-(2).jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "ank0", team: "9CIRCLE", logo: "https://i.postimg.cc/x15NPqCd/photo-2026-06-10-19-56-38-(2).jpg", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+
+            /* 22. Nova Impera */
+            { name: "xdeivekx", team: "Nova Impera", logo: "https://i.postimg.cc/L5jng8w5/Chat-GPT-Image-10-2026-02-27-08.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "m4tr1x", team: "Nova Impera", logo: "https://i.postimg.cc/L5jng8w5/Chat-GPT-Image-10-2026-02-27-08.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "marcelo", team: "Nova Impera", logo: "https://i.postimg.cc/L5jng8w5/Chat-GPT-Image-10-2026-02-27-08.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "enotick", team: "Nova Impera", logo: "https://i.postimg.cc/L5jng8w5/Chat-GPT-Image-10-2026-02-27-08.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "droneks", team: "Nova Impera", logo: "https://i.postimg.cc/L5jng8w5/Chat-GPT-Image-10-2026-02-27-08.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" },
+            { name: "evanorda", team: "Nova Impera", logo: "https://i.postimg.cc/L5jng8w5/Chat-GPT-Image-10-2026-02-27-08.png", maps: 0, diff: 0, kd: "0.00", rating3: "0.00" }
         ];
 
         const teamsData = [
             { name: "TEAM MIDLESS", logo: "https://i.postimg.cc/k5DxB3qb/file-00000000ea4c720a82392099d0c9f5aa.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "Польша" },
             { name: "Tauroda", logo: "https://i.postimg.cc/65GXdzfq/Tauroda.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "🇪🇺" },
-            { name: "Skeleton International Gaming", logo: "https://i.postimg.cc/j2NzG4gS/1.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "UA" },
             { name: "Magic spirit", logo: "https://i.postimg.cc/DzLqQvVh/4j1pxjc92wxg-Q3-c-Rs-I0EL3m-XWc-TXGvfq0Lf-BFz3h-PIm-Xylz-Nx4b-PElsk-Fdv-AUWs-Mb-Oc-GS9w-4RFEGr9j1ADC.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
             { name: "NEXORA TEAM", logo: "https://i.postimg.cc/3R909WnV/IMG-1659.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "UA" },
             { name: "Neon Void", logo: "https://i.postimg.cc/25G5NMhB/B9U9UZ0Qf-Q34KPj6bt-KVPgb-Ew-K457r-Qg3Zo-Neilb-LSO9n8QWv-Dhc-MLy-AUM9ih-ML-pb-TKe-AFil-J3d-AGjn3Hn-p.webp", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
@@ -1407,7 +2149,28 @@
             { name: "GeorgianZ", logo: "https://i.postimg.cc/Hnvd3vVV/Georgian-ZZ.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
             { name: "Lotus Team", logo: "https://i.postimg.cc/Gt4m010v/image.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
             { name: "300TON", logo: "https://i.postimg.cc/CdyYWBHC/logo.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
-            { name: "Streelxx", logo: "https://i.postimg.cc/Z5SvNCt1/FEDFE0D0-5C77-44D0-A625-EDE35EE4C211.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" }
+            { name: "Streelxx", logo: "https://i.postimg.cc/Z5SvNCt1/FEDFE0D0-5C77-44D0-A625-EDE35EE4C211.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "DragonsEsports", logo: "https://i.postimg.cc/hGLbn2ZX/56114-09999999963-1165.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "011.Team", logo: "https://i.postimg.cc/mkC9swSk/5F425B0E-0F12-4C82-BAF6-6503E5C3F6CD.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "zmp kids", logo: "https://i.postimg.cc/htSdkVQ4/2zmp.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Rayzex Team", logo: "https://i.postimg.cc/59Bjf6Vj/IMG-20260609-233940-545.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "AURIX TEAM", logo: "https://i.postimg.cc/8cZSj8wD/Chat-GPT-Image-30-2026-14-39-49.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Prus team", logo: "https://i.postimg.cc/mgFvGFxB/file-000000008614722fb3b9eef091233173.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Fox", logo: "https://i.postimg.cc/jj4ksHMS/IMG-20260604-190020-013.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Washkow", logo: "https://i.postimg.cc/HkCqdkT6/380245ea108d4778.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Soulskream", logo: "https://i.postimg.cc/3x7czfZL/Chat-GPT-Image-10-2026-10-10-48.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Magical team", logo: "https://i.postimg.cc/XYz99pXN/IMG-4177.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "k67", logo: "https://i.postimg.cc/jSL7qtvD/file-000000003684720bade8283cda4a9f2e.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Vince Community", logo: "https://i.postimg.cc/ydPdXbnS/Vince-Community-Logo.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Team Raptors", logo: "https://i.postimg.cc/bJ3y22N5/IMG-1281.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "31B", logo: "https://i.postimg.cc/26KpDd5R/file-00000000eb3c720c9c91b16d0b7621ac.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "violence team", logo: "https://i.postimg.cc/DZH2g3LL/image.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Undercover agents", logo: "https://i.postimg.cc/vZbGXzgj/editing-result-e89e86c4647811f1a7e1b2cfdd2a167c-1.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "MOLDGAME", logo: "https://i.postimg.cc/s28dF9xg/photo-2026-06-10-14-03-43.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Glampers Team", logo: "https://i.postimg.cc/HLtcBnkc/7fcabb8f-7078-40e4-aff2-b0ffa92ba5ed.jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "stsw here", logo: "https://i.postimg.cc/fTXxYwmc/IMG-1443.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "9CIRCLE", logo: "https://i.postimg.cc/x15NPqCd/photo-2026-06-10-19-56-38-(2).jpg", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" },
+            { name: "Nova Impera", logo: "https://i.postimg.cc/L5jng8w5/Chat-GPT-Image-10-2026-02-27-08.png", maps: 0, diff: "0", kd: "0.00", rating: "0.00", country: "CIS" }
         ];
 
         /* Очищено расписание (матч удален) */
@@ -1485,7 +2248,12 @@
                 const tournamentCard = document.createElement('div');
                 tournamentCard.className = 'egl-tournament-card';
 
-                let matchesHTML = '';
+                let matchesHTML = `
+                    <div class="egl-tournament-header">
+                        <div class="tournament-title-info">${tournamentName}</div>
+                        <div class="tournament-arrow-toggle">▼</div>
+                    </div>
+                `;
                 groupedMatches[tournamentName].forEach(match => {
                     const t1Obj = teamsData.find(t => t.name.toUpperCase() === match.team1.toUpperCase());
                     const logo1 = t1Obj ? t1Obj.logo : '';
@@ -1495,35 +2263,26 @@
                     matchesHTML += `
                         <div class="egl-match-row" onclick="openMatchDetails(${match.id})">
                             <div class="match-time-cell">
-                                <span class="match-time-value">${match.time}</span>
-                                <span class="match-format-badge">bo3</span>
+                                <div class="match-time-value">${match.time}</div>
+                                <div class="match-format-badge">${match.format}</div>
                             </div>
                             <div class="match-teams-cell">
                                 <div class="match-team-row-line">
-                                    <div class="team-logo-mini-container"><img src="${logo1}" alt="${match.team1}"></div>
+                                    <div class="team-logo-mini-container"><img src="${logo1}" alt=""></div>
                                     <span class="match-team-name-text">${match.team1}</span>
                                 </div>
                                 <div class="match-team-row-line">
-                                    <div class="team-logo-mini-container"><img src="${logo2}" alt="${match.team2}"></div>
+                                    <div class="team-logo-mini-container"><img src="${logo2}" alt=""></div>
                                     <span class="match-team-name-text">${match.team2}</span>
                                 </div>
                             </div>
                             <div class="match-action-cell">
-                                <button class="match-analytics-btn" onclick="showDevAlert(event)">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                                </button>
+                                <button class="match-analytics-btn">📊</button>
                             </div>
                         </div>
                     `;
                 });
-
-                tournamentCard.innerHTML = `
-                    <div class="egl-tournament-header">
-                        <div class="tournament-title-info">${tournamentName}</div>
-                        <div class="tournament-arrow-toggle">▼</div>
-                    </div>
-                    <div class="egl-tournament-content">${matchesHTML}</div>
-                `;
+                tournamentCard.innerHTML = matchesHTML;
                 container.appendChild(tournamentCard);
             }
         }
@@ -1531,122 +2290,103 @@
         function openMatchDetails(matchId) {
             const match = matchesData.find(m => m.id === matchId);
             if (!match) return;
-
+            
             const t1Obj = teamsData.find(t => t.name.toUpperCase() === match.team1.toUpperCase());
             const t2Obj = teamsData.find(t => t.name.toUpperCase() === match.team2.toUpperCase());
-            if (!t1Obj || !t2Obj) return;
-
+            
+            document.getElementById('mdLogo1').src = t1Obj ? t1Obj.logo : '';
+            document.getElementById('mdLogo2').src = t2Obj ? t2Obj.logo : '';
+            document.getElementById('mdName1').innerText = match.team1;
+            document.getElementById('mdName2').innerText = match.team2;
             document.getElementById('mdTournament').innerText = match.tournament;
             document.getElementById('mdTimeVal').innerText = match.time;
             document.getElementById('mdDateVal').innerText = match.date;
-            
-            document.getElementById('mdLogo1').src = t1Obj.logo;
-            document.getElementById('mdName1').innerHTML = t1Obj.name;
-            
-            document.getElementById('mdLogo2').src = t2Obj.logo;
-            document.getElementById('mdName2').innerHTML = t2Obj.name;
-            
             document.getElementById('mdFormat').innerText = match.format;
-            document.getElementById('mdWinnerLabel1').innerText = t1Obj.name;
-            document.getElementById('mdWinnerLabel2').innerText = t2Obj.name;
-
+            document.getElementById('mdWinnerLabel1').innerText = match.team1;
+            document.getElementById('mdWinnerLabel2').innerText = match.team2;
+            
             navigateTo('matchDetail');
         }
 
-        function switchStatsTab(tabType) {
-            const playersMenu = document.getElementById('menuTopPlayers');
-            const teamsMenu = document.getElementById('menuTopTeams');
-            const tableTitle = document.getElementById('statsTableTitle');
-            const tableHeader = document.getElementById('statsTableHeader');
-            const tableBody = document.getElementById('statsTableBody');
+        function openTeamProfile(element) {
+            const teamName = element.querySelector('.team-name').innerText;
+            const teamObj = teamsData.find(t => t.name.toUpperCase() === teamName.toUpperCase());
+            if (!teamObj) return;
 
-            playersMenu.classList.remove('active');
-            teamsMenu.classList.remove('active');
-            tableBody.innerHTML = '';
+            document.getElementById('profLogo').src = teamObj.logo;
+            document.getElementById('profName').innerText = teamObj.name;
+            document.getElementById('profPos').innerText = element.querySelector('.team-position').innerText;
+            
+            const rosterContainer = document.getElementById('profRoster');
+            rosterContainer.innerHTML = '';
+            
+            const playerTags = element.querySelectorAll('.player-tag');
+            playerTags.forEach(tag => {
+                const name = tag.innerText;
+                const role = tag.getAttribute('data-role') || 'основа';
+                
+                const card = document.createElement('div');
+                card.className = 'egl-player-card';
+                card.innerHTML = `
+                    <div class="egl-player-avatar">👤</div>
+                    <div class="egl-player-nick">${name}</div>
+                    <div class="egl-player-sub">${role}</div>
+                `;
+                rosterContainer.appendChild(card);
+            });
+
+            document.getElementById('rankingView').style.display = 'none';
+            document.getElementById('profileView').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function switchStatsTab(tabType) {
+            document.getElementById('menuTopPlayers').classList.remove('active');
+            document.getElementById('menuTopTeams').classList.remove('active');
+            
+            const tbody = document.getElementById('statsTableBody');
+            const thead = document.getElementById('statsTableHeader');
+            tbody.innerHTML = '';
 
             if (tabType === 'players') {
-                playersMenu.classList.add('active');
-                tableTitle.innerText = "Игроки с лучшей статистикой";
-                tableHeader.innerHTML = `<th>Игрок</th><th>Команда</th><th>Карты</th><th>K-D Diff</th><th>K/D</th><th>Rating 3.0</th>`;
-                playersData.forEach(p => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>
-                            <div class="player-cell-profile">
-                                <span>${p.name}</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="team-cell-layout">
-                                <div class="team-logo-mini-container"><img src="${p.logo}" alt="${p.team}"></div>
-                                <span>${p.team}</span>
-                            </div>
-                        </td>
-                        <td>${p.maps}</td>
-                        <td class="bold-stat-val">${p.diff >= 0 ? '+' + p.diff : p.diff}</td>
-                        <td class="bold-stat-val">${p.kd}</td>
-                        <td class="bold-stat-val">${p.rating3}</td>
-                    `;
-                    tableBody.appendChild(tr);
-                });
-            } else if (tabType === 'teams') {
-                teamsMenu.classList.add('active');
-                tableTitle.innerText = "Команды с лучшей статистикой";
-                tableHeader.innerHTML = `<th>Команда</th><th>Карты</th><th>K-D Diff</th><th>K/D</th><th>Рейтинг</th>`;
+                document.getElementById('menuTopPlayers').classList.add('active');
+                document.getElementById('statsTableTitle').innerText = 'Игроки с лучшей статистикой';
+                thead.innerHTML = '<th>Игрок</th><th>Команда</th><th>Карты</th><th>K-D Diff</th><th>K/D</th><th>Rating 3.0</th>';
+                
+                if (playersData.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="egl-empty-table-state">Нет данных</td></tr>';
+                } else {
+                    playersData.forEach(p => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><div class="player-cell-profile">👤 ${p.name}</div></td>
+                            <td><div class="team-cell-layout"><div class="team-logo-mini-container"><img src="${p.logo}" alt=""></div>${p.team}</div></td>
+                            <td>${p.maps}</td>
+                            <td class="bold-stat-val">${p.diff}</td>
+                            <td>${p.kd}</td>
+                            <td class="bold-stat-val">${p.rating3}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            } else {
+                document.getElementById('menuTopTeams').classList.add('active');
+                document.getElementById('statsTableTitle').innerText = 'Команды с лучшей статистикой';
+                thead.innerHTML = '<th>Команда</th><th>Регион</th><th>Карты</th><th>K-D Diff</th><th>K/D</th><th>Rating</th>';
+                
                 teamsData.forEach(t => {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td>
-                            <div class="player-cell-profile">
-                                <div class="team-logo-mini-container"><img src="${t.logo}" alt="${t.name}"></div>
-                                <span style="color: var(--egl-text-dark);">${t.name}</span>
-                            </div>
-                        </td>
+                        <td><div class="team-cell-layout"><div class="team-logo-mini-container"><img src="${t.logo}" alt=""></div>${t.name}</div></td>
+                        <td>${t.country}</td>
                         <td>${t.maps}</td>
-                        <td class="bold-stat-val" style="color: #22c55e;">${t.diff >= 0 ? '+' + t.diff : t.diff}</td>
+                        <td class="bold-stat-val">${t.diff}</td>
                         <td>${t.kd}</td>
-                        <td class="bold-stat-val" style="color: var(--egl-accent-orange);">${t.rating}</td>
+                        <td class="bold-stat-val">${t.rating}</td>
                     `;
-                    tableBody.appendChild(tr);
+                    tbody.appendChild(tr);
                 });
             }
-        }
-
-        function openTeamProfile(rowElement) {
-            try {
-                const pos = rowElement.querySelector('.team-position').innerText;
-                const logoSrc = rowElement.querySelector('img').src;
-                const teamName = rowElement.querySelector('.team-name').innerText;
-                const tier = rowElement.querySelector('.tier-badge').innerText;
-                const points = rowElement.querySelector('.points-count').innerText;
-                
-                const playerTags = rowElement.querySelectorAll('.player-tag');
-                const rosterContainer = document.getElementById('profRoster');
-                rosterContainer.innerHTML = ''; 
-                
-                playerTags.forEach(tag => {
-                    const playerName = tag.innerText.trim();
-                    const playerRole = tag.getAttribute('data-role') || 'Игрок';
-                    const playerCard = document.createElement('div');
-                    playerCard.className = 'egl-player-card';
-                    playerCard.innerHTML = `
-                        <div class="egl-player-avatar">👤</div>
-                        <div class="egl-player-nick">${playerName}</div>
-                        <div class="egl-player-sub">${playerRole}</div>
-                    `;
-                    rosterContainer.appendChild(playerCard);
-                });
-
-                document.getElementById('profPos').innerText = pos;
-                document.getElementById('profLogo').src = logoSrc;
-                document.getElementById('profName').innerText = teamName;
-                document.getElementById('profTier').innerText = tier;
-                document.getElementById('profPoints').innerText = points;
-
-                document.getElementById('rankingView').style.display = 'none';
-                document.getElementById('profileView').style.display = 'block';
-                window.scrollTo(0, 0); 
-            } catch (e) { console.error(e); }
         }
 
         function goToPlayerStats(event) {
@@ -1654,6 +2394,20 @@
             navigateTo('stats');
             switchStatsTab('players');
         }
-    </script>
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-theme');
+            const btn = document.getElementById('themeToggleBtn');
+            if (body.classList.contains('dark-theme')) {
+                btn.innerText = 'Тема: Тёмная';
+            } else {
+                btn.innerText = 'Тема: Светлая';
+            }
+        }
+
+        // Initialize players tab
+        switchStatsTab('players');
+</script>
 </body>
 </html>
